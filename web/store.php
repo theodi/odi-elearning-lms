@@ -38,7 +38,7 @@ $data = $_POST["data"]; //Fetching all posts
 $json = json_decode($data,true);
 $json = str_replace(".","\uff0e",$json);
 $two = json_encode($json);
-$data = json_decode($json);
+$data = json_decode($two);
 store($data);
 
 ?>
