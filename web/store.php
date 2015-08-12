@@ -21,13 +21,13 @@ function store($data) {
 	return true;
    } catch ( MongoConnectionException $e ) {
 //	return false;
-	syslog('Error connecting to MongoDB server ' . $connection_url . ' - ' . $db_name . ' <br/> ' . $e->getMessage());
+	syslog(LOG_ERR,'Error connecting to MongoDB server ' . $connection_url . ' - ' . $db_name . ' <br/> ' . $e->getMessage());
    } catch ( MongoException $e ) {
 //	return false;
-	syslog('Mongo Error: ' . $e->getMessage());
+	syslog(LOG_ERR,'Mongo Error: ' . $e->getMessage());
    } catch ( Exception $e ) {
 //	return false;
-	syslog('Error: ' . $e->getMessage());
+	syslog(LOG_ERR,'Error: ' . $e->getMessage());
    }
 }
 
