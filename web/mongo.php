@@ -3,10 +3,12 @@ ini_set("display_errors", 1);
 try {
 // connect to Compose assuming your MONGOHQ_URL environment
 // variable contains the connection string
-$connection_url = getenv("MONGOHQ_URL");
-
+//$connection_url = getenv("MONGOHQ_URL");
+$connection_url = "ds055792.mongolab.com:55792/heroku_0vr2zs59";
+$dbuser = "odi-elearning";
+$dbpass = "connectme";
  // create the mongo connection object
-$m = new MongoClient($connection_url);
+$m = new MongoClient("mongodb://".$connection_url,array("username" => $dbuser, "password" => $dbpass));
 
 // extract the DB name from the connection path
 $url = parse_url($connection_url);
@@ -45,7 +47,7 @@ if ( $collection_name != "" ) {
 // disconnect from server
 $m->close();
  } catch ( MongoConnectionException $e ) {
-die('Error connecting to MongoDB server ' . $connection_url . ' <br/> ' . $e->getMessage());
+die('Error connecting to MongoDB server ' . $connection_url . ' - ' . $db_name . ' <br/> ' . $e->getMessage());
  } catch ( MongoException $e ) {
 die('Mongo Error: ' . $e->getMessage());
  } catch ( Exception $e ) {
