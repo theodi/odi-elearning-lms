@@ -1,7 +1,8 @@
 <?php
 
-$mandrill_key = getenv("MANDRILL_KEY");
+require_once('mandrill/Mandrill.php');
 
+$mandrill_key = getenv("MANDRILL_KEY");
 try {
     $mandrill = new Mandrill($mandrill_key);
     $message = array(
@@ -30,9 +31,7 @@ try {
         'return_path_domain' => null
     );
     $async = false;
-    $ip_pool = 'Main Pool';
-    $send_at = '2000-01-01 00:00:00';
-    $result = $mandrill->messages->send($message, $async, $ip_pool, $send_at);
+    $result = $mandrill->messages->send($message, $async);
     print_r($result);
     /*
     Array
