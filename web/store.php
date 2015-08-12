@@ -3,6 +3,8 @@ header("Access-Control-Allow-Origin: *");
 
 include 'config.inc.php';
 
+require_once('sendMail.php');
+
 function store($data) {
    global $connection_url, $db_name, $collection;
    try {
@@ -20,6 +22,7 @@ function store($data) {
 		$col->update($query,$newdata);
 	} else {
 		$col->save($data);
+		findEmails();
 	}
 
 	$m->close();
