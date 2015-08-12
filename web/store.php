@@ -1,12 +1,12 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-include 'config.inc.php';
+include_once 'config.inc.php';
 
 require_once('sendMail.php');
 
 function store($data) {
-   global $connection_url, $db_name, $collection;
+   global $connection_url, $db_name, $collection, $mail_lock;
    try {
 	 // create the mongo connection object
 	$m = new MongoClient($connection_url);
@@ -22,6 +22,8 @@ function store($data) {
 		$col->update($query,$newdata);
 	} else {
 		$col->save($data);
+	}
+	if (!$mail_lock) {
 		findEmails();
 	}
 
