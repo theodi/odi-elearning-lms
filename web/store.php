@@ -14,6 +14,8 @@ function store($data) {
 	// use the database we connected to
 	$col = $m->selectDB($db_name)->selectCollection($collection);
 
+	$data = array('x' => 1);
+
 	$col->save($data);
 
 	syslog(LOG_ERR,"Inserted data?");
