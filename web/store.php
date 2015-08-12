@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 
 function store($data) {
    global $connection_url, $dbuser, $dbpass, $collection;
