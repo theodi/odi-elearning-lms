@@ -4,14 +4,10 @@ header("Access-Control-Allow-Origin: *");
 include 'config.inc.php';
 
 function existsID($id) {
-   global $connection_url, $dbuser, $dbpass, $collection;
+   global $connection_url, $db_name, $collection;
    try {
 	 // create the mongo connection object
-	$m = new MongoClient("mongodb://".$connection_url,array("username" => $dbuser, "password" => $dbpass));
-
-	// extract the DB name from the connection path
-	$url = parse_url($connection_url);
-	$db_name = preg_replace('/\/(.*)/', '$1', $url['path']);
+	$m = new MongoClient($connection_url);
 
 	// use the database we connected to
 	$col = $m->selectDB($db_name)->selectCollection($collection);

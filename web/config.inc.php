@@ -1,6 +1,6 @@
 <?php
-	$connection_url = parse_url(getenv("MONGOLAB_URI"));
-	$dbuser = getenv("MONGOLAB_USER");
-	$dbuser = getenv("MONGOLAB_PASS");
+	$connection_url = getenv("MONGOLAB_URI");
+	$url = parse_url($connection_url);
+	$db_name = preg_replace('/\/(.*)/', '$1', $url['path']);
 	$collection = getenv("MONGOLAB_COLLECTION");
 ?>
