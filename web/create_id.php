@@ -2,6 +2,7 @@
 include 'config.inc.php';
 
 function existsID($id) {
+   global $connection_url, $dbuser, $dbpass, $collection;
    try {
 	 // create the mongo connection object
 	$m = new MongoClient("mongodb://".$connection_url,array("username" => $dbuser, "password" => $dbpass));
