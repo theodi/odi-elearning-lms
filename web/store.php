@@ -16,8 +16,6 @@ function store($data) {
 	// use the database we connected to
 	$col = $m->selectDB($db_name)->selectCollection($collection);
 
-//	$data = array('x' => 1);
-
 	$col->save($data);
 
 	syslog(LOG_ERR,"Inserted data?");
@@ -37,12 +35,9 @@ function store($data) {
    }
 }
 
-
 $data = $_POST["data"]; //Fetching all posts
+$data = str_replace(".","\uff0e",$data);
 $json = json_decode($data,true);
-$json = str_replace(".","\uff0e",$json);
-//$two = json_encode($json);
-//$data = json_decode($two);
 
 store($json);
 
