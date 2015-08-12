@@ -45,7 +45,7 @@ if ( $collection_name != "" ) {
 // disconnect from server
 $m->close();
  } catch ( MongoConnectionException $e ) {
-die('Error connecting to MongoDB server');
+die('Error connecting to MongoDB server ' . $connection_url . ' <br/> ' . $e->getMessage());
  } catch ( MongoException $e ) {
 die('Mongo Error: ' . $e->getMessage());
  } catch ( Exception $e ) {
