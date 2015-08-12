@@ -11,8 +11,16 @@ function store($data) {
 
 	// use the database we connected to
 	$col = $m->selectDB($db_name)->selectCollection($collection);
-
-	$col->save($data);
+	
+	$id = $data["_id"];
+	$query = array('_id' => $id);
+        $count = $col->count($query);
+        if ($count > 0) {
+		$newdata = array('$set' => $data);
+		$col->update($query,$newdata);
+	} else {
+		$col->save($data);
+	}
 
 	$m->close();
 
