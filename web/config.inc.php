@@ -1,6 +1,6 @@
 <?php
-	$connection_url = "ds055792.mongolab.com:55792/heroku_0vr2zs59";
-	$dbuser = "odi-elearning";
-	$dbpass = "connectme";
-	$collection = "elearning";
+	$connection_url = parse_url(getenv("MONGOLAB_URI"));
+	$dbuser = getenv("MONGOLAB_USER");
+	$dbuser = getenv("MONGOLAB_PASS");
+	$collection = getenv("MONGOLAB_COLLECTION");
 ?>
