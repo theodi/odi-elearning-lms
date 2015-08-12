@@ -1,5 +1,5 @@
 <?php
-include 'config.inc.php'
+include 'config.inc.php';
 
 function existsID($id) {
    try {
