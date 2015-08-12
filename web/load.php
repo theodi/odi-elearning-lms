@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 
 include 'config.inc.php';
 
-function store($data) {
+function load($id) {
    global $connection_url, $dbuser, $dbpass, $collection;
    try {
 	 // create the mongo connection object
@@ -15,12 +15,16 @@ function store($data) {
 
 	// use the database we connected to
 	$col = $m->selectDB($db_name)->selectCollection($collection);
+	
+	$query = array('_id' => $id);
 
-	$col->save($data);
-
+	$res = $col->find($query);	
+	
 	$m->close();
-
-	return true;
+	
+	foreach ($res as $doc) {
+ 	   return json_encode($doc);
+	}
    } catch ( MongoConnectionException $e ) {
 //	return false;
 	syslog(LOG_ERR,'Error connecting to MongoDB server ' . $connection_url . ' - ' . $db_name . ' <br/> ' . $e->getMessage());
@@ -33,10 +37,11 @@ function store($data) {
    }
 }
 
-$data = $_POST["data"]; //Fetching all posts
-$data = str_replace(".","\uff0e",$data);
-$json = json_decode($data,true);
+$id = $_GET["id"]; //Fetching all posts
+if (!$id) exit(0);
 
-store($json);
+$data = load($id);
+header('Content-Type: application/json');
+echo str_replace("\uff0e",".",$data);
 
 ?>
