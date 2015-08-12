@@ -1,6 +1,7 @@
 {
   "require" : {
-    "ext-mongo": "*"
+    "ext-mongo": "*",
+    "mandrill/mandrill": "1.0.*"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
