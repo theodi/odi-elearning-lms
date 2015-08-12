@@ -49,5 +49,5 @@ while (existsID($guid)) {
 	$guid = GUID();
 }
 
-return $guid;
+echo $guid;
 ?>
