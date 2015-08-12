@@ -16,6 +16,8 @@ function store($data) {
 
 	$col->save($data);
 
+	syslog(LOG_ERR,"Inserted data?");
+
 	$m->close();
 
 	return true;
@@ -33,7 +35,7 @@ function store($data) {
 
 
 $data = $_POST["data"]; //Fetching all posts
-$json = json_decode($data,true);
+$json = json_decode($data);
 $json = str_replace(".","\uff0e",$json);
 store($json);
 
