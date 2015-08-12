@@ -35,8 +35,10 @@ function store($data) {
 
 
 $data = $_POST["data"]; //Fetching all posts
-$json = json_decode($data);
+$json = json_decode($data,true);
 $json = str_replace(".","\uff0e",$json);
-store($json);
+$two = json_encode($json);
+$data = json_decode($json);
+store($data);
 
 ?>
