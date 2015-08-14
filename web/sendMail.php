@@ -5,7 +5,7 @@ include_once 'config.inc.php';
 
 function findEmails() {
    global $connection_url, $db_name, $collection, $mail_lock;
-   $mail_lock = true;
+   putenv("MAIL_LOCK=true");
    try {
 	 // create the mongo connection object
 	$m = new MongoClient($connection_url);
@@ -34,7 +34,7 @@ function findEmails() {
 //	return false;
 	syslog(LOG_ERR,'Error: ' . $e->getMessage());
    }
-   $mail_lock = false;
+   putenv("MAIL_LOCK=false");
 }
 
 function markDone($id) {
