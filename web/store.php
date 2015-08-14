@@ -23,7 +23,7 @@ function store($data) {
 	} else {
 		$col->save($data);
 	}
-	if ($mail_lock == "false") {
+	if (!$mail_lock) {
 		findEmails();
 	}
 
