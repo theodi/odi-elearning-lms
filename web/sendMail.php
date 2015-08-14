@@ -3,10 +3,40 @@ require_once('mandrill/Mandrill.php');
 
 include_once 'config.inc.php';
 
+function getMailLock() {
+   global $connection_url, $db_name, $collection;
+	$m = new MongoClient($connection_url);
+	
+	// use the database we connected to
+	$col = $m->selectDB($db_name)->selectCollection($collection);
+	
+	$query = array('_id' => "email_process");
+	$count = $col->count($query);
+	if ($count > 0) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function setMailLock($state) {
+   global $connection_url, $db_name, $collection;
+	$m = new MongoClient($connection_url);
+	
+	// use the database we connected to
+	$col = $m->selectDB($db_name)->selectCollection($collection);
+	
+	$query = array('_id' => "email_process");
+	if($state) {
+		$col->save($query);
+	} else {
+		$col->remove($query);
+	}
+}
+
 function findEmails() {
-   global $connection_url, $db_name, $collection, $mail_lock;
-   $mail_lock = true;
-   putenv("MAIL_LOCK=true");
+   global $connection_url, $db_name, $collection;
+   setMailLock(true);
    try {
 	 // create the mongo connection object
 	$m = new MongoClient($connection_url);
@@ -35,7 +65,7 @@ function findEmails() {
 //	return false;
 	syslog(LOG_ERR,'Error: ' . $e->getMessage());
    }
-   $mail_lock = false;
+   setMailLock(false);
 }
 
 function markDone($id) {

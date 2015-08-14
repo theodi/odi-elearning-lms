@@ -6,7 +6,7 @@ include_once 'config.inc.php';
 require_once('sendMail.php');
 
 function store($data) {
-   global $connection_url, $db_name, $collection, $mail_lock;
+   global $connection_url, $db_name, $collection;
    try {
 	 // create the mongo connection object
 	$m = new MongoClient($connection_url);
@@ -23,7 +23,7 @@ function store($data) {
 	} else {
 		$col->save($data);
 	}
-	if (!$mail_lock) {
+	if (!getMailLock()) {
 		findEmails();
 	}
 
