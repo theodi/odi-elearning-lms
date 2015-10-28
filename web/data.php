@@ -88,7 +88,7 @@ function processOutput($output) {
 	if ($data["spoor"]["_isCourseComplete"] == 1) {
 		$line["complete"] = "true";
 	}
-	if $data["spoor"]["_isAssessmentPassed"] == 1) {
+	if ($data["spoor"]["_isAssessmentPassed"] == 1) {
 		$line["passed"] = "true";
 	}
 	return $line;
