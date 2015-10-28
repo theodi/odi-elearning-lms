@@ -106,8 +106,8 @@ function outputCSV($summary) {
 	$handle = fopen("php://output","w");
 	$first = $summary[0];
 
-//	header('Content-Type: text/csv');
-//	header('Content-Disposition: attachment; filename="data.csv"');
+	header('Content-Type: text/csv');
+	header('Content-Disposition: attachment; filename="data.csv"');
 
 	foreach ($first as $key => $value) {
 		$keys[] = $key;
