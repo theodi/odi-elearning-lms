@@ -14,7 +14,7 @@ if (!$module) {
 }
 
 query();
-//outputCSV($summary);
+outputCSV($summary);
 
 function query() {
    global $connection_url, $db_name, $collection, $summary;
@@ -77,7 +77,7 @@ function processOutput($output) {
 	$line["theme"] = $output["theme"];
 	$line["lang"] = $output["lang"];
 
-	$progress = $output["cmd.suspend_data"];
+	$progress = $output["cmi.suspend_data"];
 	$data = json_decode($progress,"true");
 	print_r($data);
 	$line["complete"] = $data["spoor"]["_isCourseComplete"];
@@ -91,8 +91,8 @@ function outputCSV($summary) {
 	$handle = fopen("php://output","w");
 	$first = $summary[0];
 
-	header('Content-Type: text/csv');
-	header('Content-Disposition: attachment; filename="data.csv"');
+//	header('Content-Type: text/csv');
+//	header('Content-Disposition: attachment; filename="data.csv"');
 
 	foreach ($first as $key => $value) {
 		$keys[] = $key;
