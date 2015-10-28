@@ -51,25 +51,31 @@ function processRecord($doc) {
 	$search = "ODI_" . $module . "_";
 	foreach ($doc as $key => $value) {
 		if (substr($key,0,strlen($search)) == $search) {
-			$output[$key] = $doc[$key];
+			$output[str_replace(" ","",$key)] = $doc[$key];
 		}
 	}
 	if ($output) {
 		$output["lang"] = $doc["lang"];
 		$output["theme"] = $doc["theme"];
 		if ($doc["email"]) {
-			$output["email"] = "yes";
+			$output["email"] = "true";
 		} else {
-			$output["email"] = "no";
+			$output["email"] = "false";
 		}
 	} else {
 		return;
 	}
-	processOutput($output);
+	return processOutput($output);
 }
 
 function processOutput($output) {
 	print_r($output);
+	$line = [];
+	$line["email"] = $output["email"];
+	$line["theme"] = $output["theme"];
+	$line["lang"] = $output["lang"];
+	
+	return $line;
 }
 
 
