@@ -74,7 +74,7 @@ function processOutput($output) {
 	if ($output["cmi.suspend_data"] == "undefined") {
 		return [];
 	}
-	print_r($output);
+	//print_r($output);
 	$line = [];
 	$line["email"] = $output["email"];
 	$line["theme"] = $output["theme"];
@@ -94,6 +94,9 @@ function processOutput($output) {
 	if ($data["spoor"]["_isAssessmentPassed"] == 1) {
 		$line["passed"] = "true";
 	}
+	$time = str_replace("．",".",$output["cmi.core.session_time"]);
+	$time = substr($time,0,strpos($time,"."));
+	$line["session_time"] = $time;
 	return $line;
 }
 
