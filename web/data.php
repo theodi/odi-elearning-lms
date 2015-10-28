@@ -71,6 +71,9 @@ function processRecord($doc) {
 }
 
 function processOutput($output) {
+	if ($output["cmi.suspend_data"] == "undefined") {
+		return [];
+	}
 	print_r($output);
 	$line = [];
 	$line["email"] = $output["email"];
@@ -83,7 +86,7 @@ function processOutput($output) {
 	$total = strlen($completion);
 	$done = substr_count($completion,"1");
 	$line["completion"] = $done / $total;
-	$line["complete"] = "true";
+	$line["complete"] = "false";
 	$line["passed"] = "false";
 	if ($data["spoor"]["_isCourseComplete"] == 1) {
 		$line["complete"] = "true";
