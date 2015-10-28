@@ -51,7 +51,7 @@ function processRecord($doc) {
 	$search = "ODI_" . $module . "_";
 	foreach ($doc as $key => $value) {
 		if (substr($key,0,strlen($search)) == $search) {
-			$output[str_replace("\uff0e",".",$key)] = $doc[$key];
+			$output[str_replace("．",".",$key)] = $doc[$key];
 		}
 	}
 	if ($output) {
