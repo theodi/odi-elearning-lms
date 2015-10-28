@@ -1,0 +1,12 @@
+body {
+	margin: 20px;
+	width: 1300px;
+}
+section {
+	display: inline-block;
+	margin: 10px;
+	text-align: center;
+}
+heading {
+	font-size: 20px;
+}
