@@ -82,10 +82,6 @@ function processOutput($output) {
 
 	$progress = $output["cmi.suspend_data"];
 	$data = json_decode($progress,"true");
-	$completion = $data["spoor"]["completion"];
-	$total = strlen($completion);
-	$done = substr_count($completion,"1");
-	$line["completion"] = $done / $total;
 	$line["complete"] = "false";
 	$line["passed"] = "false";
 	if ($data["spoor"]["_isCourseComplete"] == 1) {
@@ -94,6 +90,10 @@ function processOutput($output) {
 	if ($data["spoor"]["_isAssessmentPassed"] == 1) {
 		$line["passed"] = "true";
 	}
+	$completion = $data["spoor"]["completion"];
+	$total = strlen($completion);
+	$done = substr_count($completion,"1");
+	$line["completion"] = $done / $total;
 	$time = str_replace("．",".",$output["cmi.core.session_time"]);
 	$time = substr($time,0,strpos($time,"."));
 	$line["session_time"] = $time;
