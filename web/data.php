@@ -28,7 +28,10 @@ function query() {
 	$cursor = $col->find();
 
 	foreach ($cursor as $doc) {
-		$summary[] = processRecord($doc);
+		$ret = processRecord($doc);
+		if ($ret) {
+			$summary[] = $ret;
+		}
 	}
 		
 	$m->close();
@@ -72,7 +75,7 @@ function processRecord($doc) {
 
 function processOutput($output) {
 	if ($output["cmi.suspend_data"] == "undefined") {
-		return [];
+		return false;
 	}
 	//print_r($output);
 	$line = [];
@@ -106,9 +109,8 @@ function outputCSV($summary) {
 	$handle = fopen("php://output","w");
 	$first = $summary[0];
 
-//	header('Content-Type: text/csv');
-//	header('Content-Disposition: attachment; filename="data.csv"');
-	print_r($first);
+	header('Content-Type: text/csv');
+	header('Content-Disposition: attachment; filename="data.csv"');
 
 	foreach ($first as $key => $value) {
 		$keys[] = $key;
