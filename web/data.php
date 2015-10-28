@@ -51,7 +51,9 @@ function processRecord($doc) {
 	$search = "ODI_" . $module . "_";
 	foreach ($doc as $key => $value) {
 		if (substr($key,0,strlen($search)) == $search) {
-			$output[str_replace("．",".",$key)] = $doc[$key];
+			$outkey = str_replace($search,"",$key);
+			$outkey = str_replace("．",".",$outkey);
+			$output[$outkey] = $doc[$key];
 		}
 	}
 	if ($output) {
@@ -74,7 +76,12 @@ function processOutput($output) {
 	$line["email"] = $output["email"];
 	$line["theme"] = $output["theme"];
 	$line["lang"] = $output["lang"];
-	
+
+	$progress = $output["cmd.suspend_data"];
+	$data = json_decode($progress,"true");
+	print_r($data);
+	$line["complete"] = $data["spoor"]["_isCourseComplete"];
+	$line["passed"] = $data["spoor"]["_isAssessmentPassed"];
 	return $line;
 }
 
