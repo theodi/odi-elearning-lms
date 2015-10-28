@@ -48,7 +48,7 @@ function query() {
 function processRecord($doc) {
 	global $module;
 	$output = false;
-	$search = "ODI_" . $module;
+	$search = "ODI_" . $module . "_";
 	foreach ($doc as $key => $value) {
 		if (substr($key,0,strlen($search)) == $search) {
 			$output[$key] = $doc[$key];
