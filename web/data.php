@@ -79,9 +79,18 @@ function processOutput($output) {
 
 	$progress = $output["cmi.suspend_data"];
 	$data = json_decode($progress,"true");
-	print_r($data);
-	$line["complete"] = $data["spoor"]["_isCourseComplete"];
-	$line["passed"] = $data["spoor"]["_isAssessmentPassed"];
+	$completion = $data["spoor"]["completion"];
+	$total = strlen($completion);
+	$done = substr_count($completion,"1");
+	$line["completion"] = $done / $total;
+	$line["complete"] = "true";
+	$line["passed"] = "false";
+	if ($data["spoor"]["_isCourseComplete"] == 1) {
+		$line["complete"] = "true";
+	}
+	if $data["spoor"]["_isAssessmentPassed"] == 1) {
+		$line["passed"] = "true";
+	}
 	return $line;
 }
 
