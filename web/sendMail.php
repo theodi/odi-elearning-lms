@@ -46,7 +46,7 @@ function findEmails() {
 	// use the database we connected to
 	$col = $m->selectDB($db_name)->selectCollection($collection);
 	
-	$query = array('email_sent' => null);
+	$query = array('email_sent' => "false");
 
 	$cursor = $col->find($query);	
 //	$cursor->fields(array("_id"=>true,"email"=>true));
@@ -55,7 +55,8 @@ function findEmails() {
 	
 	foreach ($cursor as $doc) {
 	   $doc = json_encode($doc);
-	   processEmail(str_replace("\uff0e",".",$doc));
+	   processEmail($doc);
+//	   processEmail(str_replace("\uff0e",".",$doc));
 	}
    } catch ( MongoConnectionException $e ) {
 //	return false;

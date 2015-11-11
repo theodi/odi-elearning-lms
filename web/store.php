@@ -21,6 +21,7 @@ function store($data) {
 		$newdata = array('$set' => $data);
 		$col->update($query,$newdata);
 	} else {
+		$data["email_sent"] = "false";
 		$col->save($data);
 	}
 	if (!getMailLock()) {
