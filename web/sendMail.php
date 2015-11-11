@@ -103,7 +103,9 @@ function processEmail($data) {
 	$data = json_decode($data,true);
 	$id = $data["_id"];
 	$email = $data["email"];
-	if ($email) {
+	$sent = $data["email_sent"];
+	if ($email && $sent == "false") {
+		$email = str_replace("．",".",$email);
 		echo "Need to send email for $email ($id)";
 	}
 //	if (sendEmail($id,$email)) {
