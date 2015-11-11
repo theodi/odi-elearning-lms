@@ -100,7 +100,9 @@ function processEmail($data) {
 	$data = json_decode($data,true);
 	$id = $data["_id"];
 	$email = $data["email"];
-	echo "Need to send email for $email ($id)";
+	if ($email) {
+		echo "Need to send email for $email ($id)";
+	}
 //	if (sendEmail($id,$email)) {
 		markDone($id);
 //	}
