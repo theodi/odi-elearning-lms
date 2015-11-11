@@ -98,9 +98,9 @@ function processEmail($data) {
 	$data = json_decode($data,true);
 	$id = $data["_id"];
 	$email = $data["email"];
-	if (sendEmail($id,$email)) {
-		markDone($id);
-	}
+//	if (sendEmail($id,$email)) {
+//		markDone($id);
+//	}
 }
 
 function sendEmail($id,$email) {
