@@ -3,6 +3,8 @@ require_once('mandrill/Mandrill.php');
 
 include_once 'config.inc.php';
 
+findEmails();
+
 function getMailLock() {
    global $connection_url, $db_name, $collection;
 	$m = new MongoClient($connection_url);
