@@ -102,7 +102,7 @@ function processEmail($data) {
 	$sent = $data["email_sent"];
 	if ($email && $sent == "false") {
 		$email = str_replace("．",".",$email);
-		sendEmail($id,$email)
+		sendEmail($id,$email);
 		markDone($id);
 	}
 }
