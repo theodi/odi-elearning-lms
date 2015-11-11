@@ -49,7 +49,7 @@ function findEmails() {
 	$query = array('email_sent' => null);
 
 	$cursor = $col->find($query);	
-	$cursor->fields(array("_id"=>true,"email"=>true));
+//	$cursor->fields(array("_id"=>true,"email"=>true));
 	
 	$m->close();
 	
