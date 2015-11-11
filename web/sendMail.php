@@ -98,6 +98,7 @@ function markDone($id) {
 
 function processEmail($data) {
 	echo "In here";
+	print_r($data);
 	$data = json_decode($data,true);
 	$id = $data["_id"];
 	$email = $data["email"];
