@@ -3,8 +3,6 @@ require_once('mandrill/Mandrill.php');
 
 include_once 'config.inc.php';
 
-findEmails();
-
 function getMailLock() {
    global $connection_url, $db_name, $collection;
 	$m = new MongoClient($connection_url);
@@ -98,19 +96,15 @@ function markDone($id) {
 }
 
 function processEmail($data) {
-	echo "In here";
-	print_r($data);
 	$data = json_decode($data,true);
 	$id = $data["_id"];
 	$email = $data["email"];
 	$sent = $data["email_sent"];
 	if ($email && $sent == "false") {
 		$email = str_replace("．",".",$email);
-		echo "Need to send email for $email ($id)";
-	}
-//	if (sendEmail($id,$email)) {
+		sendEmail($id,$email)
 		markDone($id);
-//	}
+	}
 }
 
 function sendEmail($id,$email) {
