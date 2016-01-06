@@ -165,17 +165,14 @@ function processOutput($output) {
 		if ($values["multiSelection"]) {
 			$options = $values["options"];
 			for($o=0;$o<count($options);$o++) {
+				$line[$key . "_".$o.": " . $question] = "";
 				$selected = false;
 				for ($i=0;$i<count($selectedItems);$i++) {
 					$item = $selectedItems[$i];
-					if (!$selected) {
-						$userAnswer = getUserAnswer($item,$options[$o]);
-						if ($userAnswer != null) {
-							$selected = $userAnswer;
-							$line[$key . "_".$o.": " . $question] = $userAnswer;
-						} else {
-							$line[$key . "_".$o.": " . $question] = "";
-						}
+					$userAnswer = getUserAnswer($item,$options[$o]);
+					if (!$selected && $userAnswer != null) {
+						$selected = $userAnswer;
+						$line[$key . "_".$o.": " . $question] = $userAnswer;
 					}
 				}
 			}
