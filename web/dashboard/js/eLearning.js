@@ -183,20 +183,41 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
 	value = Math.round(d.completion * 10);
         return +value;
     });
-    
+   
+    var rowcount = 0; 
     data.forEach(function(row) {
+	rowcount++;
     	if (!expansionDone) {
+		titles = [];
 		keys = Object.keys(row);
 		questionsHTML = "";
 		keys.forEach(function(key) {
 			if (key.substring(0,2) == "c-" && key.indexOf(":") > 0) {
-				id_key = key.substring(key.indexOf(":")+1,key.length);
+				re = /^c-\d*[_]/i;
+				multi = key.match(re);
+				id_key = key.replace(":","");
 				id_key = id_key.replace(/ /g,"-");
 				id_key = id_key.replace("?","");
-				questionsHTML += "<subsection><h3>" + key + "</h3><div id='" + id_key + "' class='dc-chart'></div></subsection>";
+				title = key.substring(key.indexOf(":")+1,key.length);
+				if (!titles[title]) {
+					mscount = 0;
+					questionsHTML += "</subsection>";
+					questionsHTML += "<subsection><h3>" + title + "</h3><div id='" + id_key + "' class='dc-chart";
+					questionsHTML += "'></div>";
+					titles[title] = true;
+					mscount++;
+				} else {
+					questionsHTML += "<div id='" + id_key + "' class='dc-chart";
+					if (multi) {
+						questionsHTML += " multiSelection ms" + mscount + " ";
+					}
+					questionsHTML += "'></div>";
+					mscount++;
+				}
 				expansion[id_key] = key;
 			}
 		});
+		questionsHTML += "</subsection>";
 		$('#questions').append(questionsHTML);
 		expansionDone = true;
 	}
@@ -218,6 +239,8 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
 		.height(160)
 		.dimension(dimension)
 		.group(group)
+		.margins({top: 0, left: 10, right: 10, bottom: 40})
+		.x(d3.scale.linear().range([0,270]).domain([0,rowcount]))
 		.label(function (d) {
 			var label = d.key;
 			return label;
