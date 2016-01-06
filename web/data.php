@@ -170,7 +170,7 @@ function processOutput($output) {
 				for ($i=0;$i<count($selectedItems);$i++) {
 					$item = $selectedItems[$i];
 					$userAnswer = getUserAnswer($item,$options[$o]);
-					if ($line["passed"] == "not attempted" && $userAnswer != null) {
+					if ($line["passed"] == "not attempted" && $userAnswer != "") {
 						$line["passed"] == "false";
 					}
 					if (!$selected && $userAnswer != null) {
@@ -182,7 +182,7 @@ function processOutput($output) {
 		} else {
 			$item = $selectedItems[0];
 			$userAnswer =  getUserAnswer($item,null);
-			if ($line["passed"] == "not attempted" && $userAnswer != null) {
+			if ($line["passed"] == "not attempted" && $userAnswer != "") {
 					$line["passed"] == "false";
 			}
 			$line[$key . ": " . $question] = $userAnswer;
