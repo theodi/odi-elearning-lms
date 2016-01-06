@@ -19,6 +19,7 @@ var themeLine = dc.rowChart('#theme-line');
 var langLine = dc.rowChart('#lang-line');
 var completeBar = dc.barChart('#complete-bar');
 var timeBar = dc.barChart('#time-bar');
+var dataTable = dc.dataTable('#dc-data-table');
 
 d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (data) {
     var ndx = crossfilter(data);
@@ -43,7 +44,20 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
             var label = d.key;
             return label;
         });
-    
+ 
+    dataTable
+        .dimension(complete)
+        .group(completeGroup)
+        .size(10)
+        .columns([
+            'id',
+            'email',
+            'lang',
+            'complete',
+	    'passed',
+            'session_time'
+        ]);
+
     var percent = ndx.dimension(function(d) {
 	value = Math.round(d.completion * 10);
         return +value;

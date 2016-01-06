@@ -79,6 +79,7 @@ function processOutput($output) {
 	}
 	//print_r($output);
 	$line = [];
+	$line["id"] = $output["_id"];
 	$line["email"] = $output["email"];
 	$line["theme"] = $output["theme"];
 	$line["lang"] = $output["lang"];
