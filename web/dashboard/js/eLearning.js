@@ -189,8 +189,8 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
 		keys = Object.keys(row);
 		questionsHTML = "";
 		keys.forEach(function(key) {
-			if (key.substring(0,3) == "Q: ") {
-				id_key = key.replace("Q: ","");
+			if (key.substring(0,2) == "c-" && key.indexOf(":") > 0) {
+				id_key = key.substring(key.indexOf(":")+1,key.length);
 				id_key = id_key.replace(/ /g,"-");
 				id_key = id_key.replace("?","");
 				questionsHTML += "<subsection><h3>" + key + "</h3><div id='" + id_key + "' class='dc-chart'></div></subsection>";

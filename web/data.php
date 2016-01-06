@@ -36,25 +36,30 @@ function getAssessmentData($data) {
 		if (strpos($type,"mcq") !== false) {
 			$id = $current["_id"];
 			$mcq[$id]["question"] = $current["title"];
-			$mcq[$id]["options"] = getOptions($current);
+			$mcq[$id] = getOptions($current,$mcq[$id]);
 		}
 	}
 	return $mcq;
 }
 
-function getOptions($current) {
+function getOptions($current,$mcq) {
 	$items = $current["_items"];
+	$selectedCount = 0;
 	for ($i=0;$i<count($items);$i++) {
 		$item = $items[$i];
 		if ($item["_shouldBeSelected"] == 1) {
+			$selectedCount++;
 			$item["text"] = strtoupper($item["text"]);
 		}
 		$options[] = $item["text"];
 	}
-	return $options;
+	$mcq["options"] = $options;
+	if ($selectedCount > 1) {
+		$mcq["multiSelection"] = true;
+	}
+	return $mcq;
 }
 //$summary[] = offline();
-//exit(1);
 
 query();
 outputCSV($summary);
@@ -157,7 +162,7 @@ function processOutput($output) {
 	foreach($assessmentData as $key => $values) {
 		$question = $values["question"];
 		$selectedItems = $data[$key]["selectedItems"];
-		if (count($selectedItems) > 1) {
+		if ($values["multiSelection"]) {
 			$options = $values["options"];
 			for($o=0;$o<count($options);$o++) {
 				$selected = false;
@@ -179,7 +184,6 @@ function processOutput($output) {
 			$line[$key . ": " . $question] = getUserAnswer($item,null);
 		}
 	}
-	//print_r($line);
 	return $line;
 }
 
