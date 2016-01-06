@@ -53,7 +53,7 @@ function getOptions($current) {
 	}
 	return $options;
 }
-//offline();
+//$summary[] = offline();
 //exit(1);
 
 query();
@@ -62,7 +62,7 @@ outputCSV($summary);
 function offline() {
 	$data = file_get_contents("test.json");
 	$data = json_decode($data,true);
-	processRecord($data);
+	return processRecord($data);
 }
 
 function query() {
@@ -156,18 +156,45 @@ function processOutput($output) {
 	$data = json_decode($assess_data,"true");
 	foreach($assessmentData as $key => $values) {
 		$question = $values["question"];
-		//FIXME if the MCQ takes more than one answer then comma (or other divider) separate them???
-		$userAnswer = $data[$key]["selectedItems"][0]["text"];
-		$userAnswer = substr($userAnswer,0,-3);
-		$userCorrect = $data[$key]["correct"];
-		if ($userCorrect == 1) {
-			$userAnswer = strToUpper($userAnswer);
+		$selectedItems = $data[$key]["selectedItems"];
+		if (count($selectedItems) > 1) {
+			$options = $values["options"];
+			for($o=0;$o<count($options);$o++) {
+				$selected = false;
+				for ($i=0;$i<count($selectedItems);$i++) {
+					$item = $selectedItems[$i];
+					if (!$selected) {
+						$userAnswer = getUserAnswer($item,$options[$o]);
+						if ($userAnswer != null) {
+							$selected = $userAnswer;
+							$line[$key . "_".$o.": " . $question] = $userAnswer;
+						} else {
+							$line[$key . "_".$o.": " . $question] = "";
+						}
+					}
+				}
+			}
+		} else {
+			$item = $selectedItems[0];
+			$line[$key . ": " . $question] = getUserAnswer($item,null);
 		}
-		$line["Q: " . $question] = $userAnswer;
 	}
+	//print_r($line);
 	return $line;
 }
 
+function getUserAnswer($item,$option) {
+	$userAnswer = $item["text"];
+//	$userAnswer = substr($userAnswer,0,-3);
+	$userCorrect = $item["correct"];
+	if ($userCorrect == 1) {
+		$userAnswer = strToUpper($userAnswer);
+	}
+	if ($option==null || $option == $userAnswer) {
+		return $userAnswer;
+	}
+	return "";
+}
 
 function outputCSV($summary) {
 	
