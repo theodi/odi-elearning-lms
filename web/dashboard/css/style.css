@@ -7,6 +7,21 @@ section {
 	margin: 10px;
 	text-align: center;
 }
+subsection {
+	display: inline-block;
+        margin: 10px;
+        text-align: center;
+}
+#questions {
+	display: block;
+	width: 100%;
+	text-align: left;	
+}
+.dc-chart g.row text {
+    fill: black;
+    font-size: 12px;
+    cursor: pointer;
+}
 heading {
 	font-size: 20px;
 }

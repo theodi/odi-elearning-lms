@@ -20,12 +20,14 @@ var langLine = dc.rowChart('#lang-line');
 var completeBar = dc.barChart('#complete-bar');
 var timeBar = dc.barChart('#time-bar');
 var dataTable = dc.dataTable('#dc-data-table');
+var questionIDs = [];
+var expansionDone = false;
 
 d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (data) {
+    var expansion = [];
     var ndx = crossfilter(data);
     var all = ndx.groupAll();
-
-
+    
     var complete = ndx.dimension(function(d) {
         return d.complete;
     });
@@ -119,7 +121,7 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
         return d.lang;
     });
     
-    var langGroup = lang.group();
+   var langGroup = lang.group();
    
     langLine
         .width(320)
@@ -159,7 +161,7 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
         .x(d3.scale.linear().domain([0,11]))
 	.gap(0.1)
 	.brushOn(true);
-    
+   
     var id = ndx.dimension(function(d) {
 	return d.id;
     });
@@ -181,6 +183,46 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
 	value = Math.round(d.completion * 10);
         return +value;
     });
+    
+    data.forEach(function(row) {
+    	if (!expansionDone) {
+		keys = Object.keys(row);
+		questionsHTML = "";
+		keys.forEach(function(key) {
+			if (key.substring(0,3) == "Q: ") {
+				id_key = key.replace("Q: ","");
+				id_key = id_key.replace(/ /g,"-");
+				id_key = id_key.replace("?","");
+				questionsHTML += "<subsection><h3>" + key + "</h3><div id='" + id_key + "' class='dc-chart'></div></subsection>";
+				expansion[id_key] = key;
+			}
+		});
+		$('#questions').append(questionsHTML);
+		expansionDone = true;
+	}
+    });
+
+    for (var key in expansion) {
+	questionIDs[key] = dc.rowChart('#' + key);
+	column_title = expansion[key];
+	var dimension = ndx.dimension(function(d) {
+		if (d[column_title] == "") {
+			return "no answer";
+		} else {
+			return d[column_title];
+		}
+	});
+	var group = dimension.group();
+	questionIDs[key]
+		.width(320)
+		.height(160)
+		.dimension(dimension)
+		.group(group)
+		.label(function (d) {
+			var label = d.key;
+			return label;
+		});
+    }
  
     var count = function() {
 	number = complete.top(Number.POSITIVE_INFINITY).length;
