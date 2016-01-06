@@ -76,7 +76,7 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
         .dimension(passed)
         .group(passedGroup)
 //        .ordinalColors(['green', 'red')
-        .colors(d3.scale.ordinal().domain(["true","false"]).range(['blue','gray']))
+        .colors(d3.scale.ordinal().domain(["true","false","not attempted"]).range(['blue','black','gray']))
         .label(function (d) {
             var label = d.key;
             return label;
