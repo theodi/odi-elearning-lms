@@ -60,6 +60,7 @@ function processRecord($doc) {
 		}
 	}
 	if ($output) {
+		$output["id"] = $doc["_id"];
 		$output["lang"] = $doc["lang"];
 		$output["theme"] = $doc["theme"];
 		if ($doc["email"]) {
@@ -79,7 +80,7 @@ function processOutput($output) {
 	}
 	//print_r($output);
 	$line = [];
-	$line["id"] = $output["_id"];
+	$line["id"] = $output["id"];
 	$line["email"] = $output["email"];
 	$line["theme"] = $output["theme"];
 	$line["lang"] = $output["lang"];
