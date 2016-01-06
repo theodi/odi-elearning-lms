@@ -45,19 +45,6 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
             return label;
         });
  
-    dataTable
-        .dimension(complete)
-        .group(completeGroup)
-        .size(10)
-        .columns([
-            'id',
-            'email',
-            'lang',
-            'complete',
-	    'passed',
-            'session_time'
-        ]);
-
     var percent = ndx.dimension(function(d) {
 	value = Math.round(d.completion * 10);
         return +value;
@@ -172,12 +159,34 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
         .x(d3.scale.linear().domain([0,11]))
 	.gap(0.1)
 	.brushOn(true);
+    
+    var id = ndx.dimension(function(d) {
+	return d.id;
+    });
+
+    dataTable
+        .dimension(id)
+        .group(function (d) {
+		return d["passed"];
+	})
+        .size(10)
+	.columns([
+	    'id',
+            'email',
+	    'passed',
+	    'complete'
+        ]);
+
+    var percent = ndx.dimension(function(d) {
+	value = Math.round(d.completion * 10);
+        return +value;
+    });
  
     var count = function() {
 	number = complete.top(Number.POSITIVE_INFINITY).length;
 	document.getElementById('total').innerHTML = number;
     }
-	setInterval(function() {console.log(count());},1000); 
+	setInterval(function() { count(); },1000); 
 
         dc.renderAll();
     });

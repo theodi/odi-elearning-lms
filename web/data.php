@@ -8,13 +8,62 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 $summary = [];
 
+$module_data_url_prefix = "http://theodi.github.io/ODI-eLearning/en/";
+$module_data_suffix = "/course/en/components.json";
+
 $module = $_GET["module"];
 if (!$module) {
 	exit(0);
 }
 
+if (is_numeric($module)) {
+	$module_data_url = $module_data_url_prefix . "module" . $module . $module_data_suffix;
+} else {
+	$module_data_url = $module_data_url_prefix . $module . $module_data_suffix;
+}
+
+$data = file_get_contents($module_data_url);
+
+if ($data) {
+	$assessmentData = getAssessmentData($data);
+}
+
+function getAssessmentData($data) {
+	$data = json_decode($data,true);
+	for($i=0;$i<count($data);$i++) {
+		$current = $data[$i];
+		$type = $current["_component"];
+		if (strpos($type,"mcq") !== false) {
+			$id = $current["_id"];
+			$mcq[$id]["question"] = $current["title"];
+			$mcq[$id]["options"] = getOptions($current);
+		}
+	}
+	return $mcq;
+}
+
+function getOptions($current) {
+	$items = $current["_items"];
+	for ($i=0;$i<count($items);$i++) {
+		$item = $items[$i];
+		if ($item["_shouldBeSelected"] == 1) {
+			$item["text"] = strtoupper($item["text"]);
+		}
+		$options[] = $item["text"];
+	}
+	return $options;
+}
+//offline();
+//exit(1);
+
 query();
 outputCSV($summary);
+
+function offline() {
+	$data = file_get_contents("test.json");
+	$data = json_decode($data,true);
+	processRecord($data);
+}
 
 function query() {
    global $connection_url, $db_name, $collection, $summary;
@@ -75,10 +124,10 @@ function processRecord($doc) {
 }
 
 function processOutput($output) {
+	global $assessmentData;
 	if ($output["cmi.suspend_data"] == "undefined") {
 		return false;
 	}
-	//print_r($output);
 	$line = [];
 	$line["id"] = $output["id"];
 	$line["email"] = $output["email"];
@@ -102,6 +151,20 @@ function processOutput($output) {
 	$time = str_replace("．",".",$output["cmi.core.session_time"]);
 	$time = substr($time,0,strpos($time,"."));
 	$line["session_time"] = $time;
+
+	$assess_data = $output["cmi.answers"];
+	$data = json_decode($assess_data,"true");
+	foreach($assessmentData as $key => $values) {
+		$question = $values["question"];
+		//FIXME if the MCQ takes more than one answer then comma (or other divider) separate them???
+		$userAnswer = $data[$key]["selectedItems"][0]["text"];
+		$userAnswer = substr($userAnswer,0,-3);
+		$userCorrect = $data[$key]["correct"];
+		if ($userCorrect == 1) {
+			$userAnswer = strToUpper($userAnswer);
+		}
+		$line["Q: " . $question] = $userAnswer;
+	}
 	return $line;
 }
 
