@@ -193,6 +193,7 @@ function processOutput($output) {
 
 function getUserAnswer($item,$option) {
 	$userAnswer = $item["text"];
+	$userAnswer = str_replace("．",".",$userAnswer);
 //	$userAnswer = substr($userAnswer,0,-3);
 	$userCorrect = $item["correct"];
 	if ($userCorrect == 1) {
