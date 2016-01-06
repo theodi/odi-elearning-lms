@@ -142,7 +142,7 @@ function processOutput($output) {
 	$progress = $output["cmi.suspend_data"];
 	$data = json_decode($progress,"true");
 	$line["complete"] = "false";
-	$line["passed"] = "false";
+	$line["passed"] = "not attempted";
 	if ($data["spoor"]["_isCourseComplete"] == 1) {
 		$line["complete"] = "true";
 	}
@@ -170,6 +170,9 @@ function processOutput($output) {
 				for ($i=0;$i<count($selectedItems);$i++) {
 					$item = $selectedItems[$i];
 					$userAnswer = getUserAnswer($item,$options[$o]);
+					if ($line["passed"] == "not attempted" && $userAnswer != null) {
+						$line["passed"] == "false";
+					}
 					if (!$selected && $userAnswer != null) {
 						$selected = $userAnswer;
 						$line[$key . "_".$o.": " . $question] = $userAnswer;
@@ -178,7 +181,11 @@ function processOutput($output) {
 			}
 		} else {
 			$item = $selectedItems[0];
-			$line[$key . ": " . $question] = getUserAnswer($item,null);
+			$userAnswer =  getUserAnswer($item,null);
+			if ($line["passed"] == "not attempted" && $userAnswer != null) {
+					$line["passed"] == "false";
+			}
+			$line[$key . ": " . $question] = $userAnswer;
 		}
 	}
 	return $line;
