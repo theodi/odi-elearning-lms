@@ -197,6 +197,7 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
 				multi = key.match(re);
 				id_key = key.replace(":","");
 				id_key = id_key.replace(/ /g,"-");
+				id_key = id_key.replace(/\./g,"");
 				id_key = id_key.replace("?","");
 				title = key.substring(key.indexOf(":")+1,key.length);
 				if (!titles[title]) {
