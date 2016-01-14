@@ -17,13 +17,13 @@ function archive_elearning() {
 	$('#archive_elearning').html('Please wait');
 	$.get('/api/archive.php',function(data) {
 		$('#archive_elearning').html(data);
-	}
+	});
 }
 
 function addListeners() {
 	$('#archive_elearning_button').on('click',function() {
 		archive_elearning();
-	}
+	});
 }
 
 $(document).ready(function() {
