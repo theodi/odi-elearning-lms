@@ -1,8 +1,11 @@
 <?php
-	$location = "/admin.php";
+	$location = "/admin/index.php";
+        $path = "../";
+        set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+
 	include('_includes/header.php');
 ?>
-<script src="js/jquery-2.1.4.min.js"></script>
+<script src="../js/jquery-2.1.4.min.js"></script>
 <h1>Admin actions</h1>
 
 <h2>Archive empty eLearning profiles</h2>
