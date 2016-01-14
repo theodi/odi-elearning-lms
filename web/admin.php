@@ -1,5 +1,5 @@
 <?php
-	$location = "admin.php";
+	$location = "/admin.php";
 	include('_includes/header.php');
 ?>
 <script src="js/jquery-2.1.4.min.js"></script>
