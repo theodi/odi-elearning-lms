@@ -9,12 +9,13 @@
 	echo '</table>';
 	include('_includes/footer.html');
 
-$mapping[];
-
-$tracking["open-data-day"] = "InADay";
 
 function coursesTable() {
    global $connection_url, $db_name, $courses_collection;
+
+   $tracking["open-data-day"] = "InADay";
+
+
    try {
          // create the mongo connection object
         $m = new MongoClient($connection_url);
