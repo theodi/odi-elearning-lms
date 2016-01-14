@@ -4,6 +4,7 @@
 	set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 	include('_includes/header.php');
 	echo '<table style="width: 100%;">';
+	echo '<tr><th>Course name</th><th>Type</th></tr>';
 	echo coursesTable();
 	echo '</table>';
 	include('_includes/footer.html');
