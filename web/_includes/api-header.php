@@ -61,6 +61,10 @@ if ($client->getAccessToken()) {
 	$page['title'] = 'Archive';
 	$page['admin'] = true;
 	$pages[] = $page;
+	$page['url'] = '/api/update_courses.php';
+	$page['title'] = 'Update Courses';
+	$page['admin'] = true;
+	$pages[] = $page;
 	for($i=0;$i<count($pages);$i++) {
 		if ($pages[$i]['url'] == $location) {
 			$current = $pages[$i];

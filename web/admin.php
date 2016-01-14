@@ -11,6 +11,13 @@
 	Click the button below to archive empty eLearning profiles.
 	<button id="archive_elearning_button">Archive empty profiles</button>
 </section>
+
+<h2>Update courses from publisher</h2>
+
+<section id="update_courses">
+	Click below to update the list of courses from the publisher (theodi.org) data.
+	<button id="update_courses_button">Update courses from publisher</button>
+</section>
 <script>
 
 function archive_elearning() {
@@ -20,9 +27,19 @@ function archive_elearning() {
 	});
 }
 
+function update_courses() {
+	$('#update_courses').html('Please wait');
+	$.get('/api/update_courses.php',function(data) {
+		$('#update_courses').html(data);
+	});
+}
+
 function addListeners() {
 	$('#archive_elearning_button').on('click',function() {
 		archive_elearning();
+	});
+	$('#update_courses_button').on('click',function() {
+		update_courses();
 	});
 }
 

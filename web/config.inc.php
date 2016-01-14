@@ -8,4 +8,6 @@
         $client_id = getenv("GOOGLE_OAUTH_ID");
  	$client_secret = getenv("GOOGLE_OAUTH_SECRET");
  	$redirect_uri = getenv("GOOGLE_REDIRECT_URI");
+	$courses_collection = getenv("MONGOLAB_COURSES");
+	$instances_collection = getenv("MONGOLAB_INSTANCES");
 ?>
