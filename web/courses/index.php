@@ -28,7 +28,7 @@ function coursesTable() {
         $output = '';
         foreach ($cursor as $doc) {
 		$output .= '<tr><td>' . $doc["title"] . '</td>';
-		$output .= '<td style="text-align: center;><img src="/images/';
+		$output .= '<td style="text-align: center;"><img src="/images/';
 			if ($doc["type"]) { $output .= $doc["type"]; } else { $output .= "f2f"; };
 		$output .= '.png"></img></td>';
 		$output .= '<td style="text-align: center;">';
