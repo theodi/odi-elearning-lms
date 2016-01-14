@@ -19,7 +19,7 @@ function getInstances() {
 	$json = json_decode($data,true);
 	$results = $json["results"];
 	for ($i=0;$i<count($results);$i++) {
-		store($results[$i],$collection);
+		store($results[$i],$instances_collection);
 	}
 }
 
