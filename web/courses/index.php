@@ -14,6 +14,7 @@ function coursesTable() {
    global $connection_url, $db_name, $courses_collection;
 
    $tracking["open-data-day"] = "InADay";
+   $tracking["open-data-science"] = "ODS";
 
    try {
          // create the mongo connection object
