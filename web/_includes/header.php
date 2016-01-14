@@ -86,6 +86,11 @@ function getUserStatusLink($pages) {
 	//$page['admin'] = true;
 	$page['loggedIn'] = true;
 	$pages[] = $page;
+	$page['url'] = '/admin.php';
+	$page['title'] = 'Admin';
+	$page["long_title"] = "LMS Administration";
+	$page['admin'] = true;
+	$pages[] = $page;
 	$pages = getUserStatusLink($pages);
 	for($i=0;$i<count($pages);$i++) {
 		if ($pages[$i]['url'] == $location) {
