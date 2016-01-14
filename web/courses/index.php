@@ -15,7 +15,6 @@ function coursesTable() {
 
    $tracking["open-data-day"] = "InADay";
 
-
    try {
          // create the mongo connection object
         $m = new MongoClient($connection_url);
@@ -36,6 +35,8 @@ function coursesTable() {
 			$output .= '<a href="/dashboard/index.php?module=' . $doc["_moduleId"] . '<img src="/images/dashboard.png" width="100px"/></a>';
 		} elseif ($tracking[$doc["slug"]]) {
 			$output .= '<a href="/dashboard/index.php?module=' . $tracking[$doc["slug"]] . '<img src="/images/dashboard.png" width="100px"/></a>';
+		} else {
+			$output .= $doc["slug"];
 		}
 		$output .= '</td>';
 		$output .= '</tr>';
