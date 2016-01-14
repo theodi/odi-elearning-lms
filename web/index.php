@@ -27,7 +27,7 @@
 	<p class="welcome">Welcome <a href="<?php echo $userData["link"]; ?>" /><?php echo $userData["name"]; ?></a>.</p>
 	<p class="oauthemail"><?php echo $userData["email"]; ?></p>
 	<div class='logout'><a href='?logout'>Logout</a></div>
-<?php
+<?php	
 	}
 ?>
   </div>

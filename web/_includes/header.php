@@ -76,10 +76,10 @@ function getUserStatusLink($pages) {
 	$page['title'] = 'home';
 	$page['long_title'] = "Learning Management System";
 	$pages[] = $page;
-	$page['url'] = 'los.php';
-	$page['title'] = 'LOs';
-	$page["long_title"] = "Learning outcome management";
-	$page['admin'] = true;
+	$page['url'] = 'profile.php';
+	$page['title'] = 'Profile';
+	$page["long_title"] = "Your profile";
+	//$page['admin'] = true;
 	$pages[] = $page;
 	$pages = getUserStatusLink($pages);
 	for($i=0;$i<count($pages);$i++) {
