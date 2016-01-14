@@ -70,6 +70,10 @@ if ($client->getAccessToken()) {
 			$current = $pages[$i];
 		}
 	}
+	if (!$current) {
+		header('Location: /401.php');
+		exit();
+	}
 	if ($current['admin'] && !$userData["isAdmin"]) {
 		header('Location: /401.php');
 		exit();

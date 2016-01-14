@@ -1,7 +1,7 @@
 <?php
 
-$location = "update_courses";
-$path = "/api/update_courses.php";
+$location = "api/update_courses.php";
+$path = "../";
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 include_once 'config.inc.php';
 include('_includes/api-header.php');
