@@ -76,7 +76,7 @@ function getUserStatusLink($pages) {
 	$page['title'] = 'Home';
 	$page['long_title'] = "Learning Management System";
 	$pages[] = $page;
-	$page['url'] = '/dashboard/?module=1';
+	$page['url'] = '/dashboard/index.php?module=1';
 	$page['title'] = 'Dashboards';
 	$page['long_title'] = "Dashboards";
 	$pages[] = $page;
@@ -116,7 +116,7 @@ function getUserStatusLink($pages) {
 <link href="http://assets.theodi.org/css/odi-bootstrap-pomegranate.css" rel="stylesheet">
 <link href="http://assets.theodi.org/css/odi-bootstrap-red.css" rel="stylesheet">-->
 <link href="http://assets.theodi.org/css/odi-bootstrap.css" rel="stylesheet">
-<link rel="shortcut icon" href="images/odifavicon32.ico">
+<link rel="shortcut icon" href="/images/odifavicon32.ico">
 </head>
 <body>
 <nav>
@@ -125,7 +125,7 @@ function getUserStatusLink($pages) {
 			<div class='navbar-inner'>
 				<h1>ODI LMS</h1>
 				<a class='brand' href='/admin'>
-					<img alt="Logo" src="images/logo.png" />
+					<img alt="Logo" src="/images/logo.png" />
 				</a>
 			</div>
 		</div>

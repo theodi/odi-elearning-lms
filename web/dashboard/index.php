@@ -1,5 +1,5 @@
 <?php
-	$location = "/dashboard/?module=1";
+	$location = "/dashboard/index.php?module=1";
 	$path = "../";
 	set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 	include('_includes/header.php');
