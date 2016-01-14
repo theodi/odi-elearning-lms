@@ -4,11 +4,14 @@
 	set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 	include('_includes/header.php');
 	echo '<table style="width: 100%;">';
-	echo '<tr><th>Course name</th><th>Type</th></tr>';
+	echo '<tr><th>Course name</th><th>Type</th><th>Dashboard</th></tr>';
 	echo coursesTable();
 	echo '</table>';
 	include('_includes/footer.html');
 
+$mapping[];
+
+$tracking["open-data-day"] = "InADay";
 
 function coursesTable() {
    global $connection_url, $db_name, $courses_collection;
@@ -27,6 +30,12 @@ function coursesTable() {
 		$output .= '<td><img src="/images/';
 			if ($doc["type"]) { $output .= $doc["type"]; } else { $output .= "f2f"; };
 		$output .= '.png"></img></td>';
+		$output .'<td>';
+		if ($doc["_moduleId"]) {
+			$output .= '<a href="/dashboard/index.php?module=' . $doc["_moduleId"] . '<img src="/images/dashboard.png" width="100px"/></a>';
+		} elseif($tracking[$doc["slug"]]) {
+			$output .= '<a href="/dashboard/index.php?module=' . $tracking[$doc["slug"]] . '<img src="/images/dashboard.png" width="100px"/></a>';
+		}
 		$output .= '</tr>';
         }
         $m->close();
