@@ -76,7 +76,11 @@ function getUserStatusLink($pages) {
 	$page['title'] = 'Home';
 	$page['long_title'] = "Learning Management System";
 	$pages[] = $page;
-	$page['url'] = 'profile.php';
+	$page['url'] = '/dashboard/?module=1';
+	$page['title'] = 'Dashboards';
+	$page['long_title'] = "Dashboards";
+	$pages[] = $page;
+	$page['url'] = '/profile.php';
 	$page['title'] = 'Profile';
 	$page["long_title"] = "Your profile";
 	//$page['admin'] = true;
