@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+$path = "../";
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 include_once 'config.inc.php';
 
