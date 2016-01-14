@@ -1,9 +1,9 @@
 <?php
-include_once 'config.inc.php';
 
 $location = "update_courses";
 $path = "/api/update_courses.php";
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+include_once 'config.inc.php';
 include('_includes/api-header.php');
 
 getInstances();
