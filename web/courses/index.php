@@ -31,12 +31,13 @@ function coursesTable() {
 		$output .= '<td><img src="/images/';
 			if ($doc["type"]) { $output .= $doc["type"]; } else { $output .= "f2f"; };
 		$output .= '.png"></img></td>';
-		$output .'<td>';
+		$output .= '<td>';
 		if ($doc["_moduleId"]) {
 			$output .= '<a href="/dashboard/index.php?module=' . $doc["_moduleId"] . '<img src="/images/dashboard.png" width="100px"/></a>';
-		} elseif($tracking[$doc["slug"]]) {
+		} elseif ($tracking[$doc["slug"]]) {
 			$output .= '<a href="/dashboard/index.php?module=' . $tracking[$doc["slug"]] . '<img src="/images/dashboard.png" width="100px"/></a>';
 		}
+		$output .= '</td>';
 		$output .= '</tr>';
         }
         $m->close();
