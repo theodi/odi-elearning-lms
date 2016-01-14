@@ -73,13 +73,14 @@ function getUserStatusLink($pages) {
 	$site_title = "ODI LMS";
 	$pages = [];
 	$page['url'] = '/';
-	$page['title'] = 'home';
+	$page['title'] = 'Home';
 	$page['long_title'] = "Learning Management System";
 	$pages[] = $page;
 	$page['url'] = 'profile.php';
 	$page['title'] = 'Profile';
 	$page["long_title"] = "Your profile";
 	//$page['admin'] = true;
+	$page['loggedIn'] = true;
 	$pages[] = $page;
 	$pages = getUserStatusLink($pages);
 	for($i=0;$i<count($pages);$i++) {
@@ -88,6 +89,10 @@ function getUserStatusLink($pages) {
 		}
 	}
 	if ($current['admin'] && !$userData["isAdmin"]) {
+		header('Location: 401.php');
+		exit();
+	}
+	if (!$userData && $current['loggedIn']) {
 		header('Location: 401.php');
 		exit();
 	}
@@ -128,13 +133,19 @@ function getUserStatusLink($pages) {
 					<?php 
 					for ($i=0;$i<count($pages);$i++) {
 						$page = $pages[$i];
-						if (!$page["admin"]) {
+						if (!$page["admin"] && !$page["loggedIn"]) {
 							echo '<li><a href="'.$page["url"].'">'.$page["title"].'</a>';
 							if ($current == $page["url"]) {
 								echo '<div class="arrow-down"></div>';
 							}
 							echo '</li>';
 						} elseif ($page["admin"] && $userData["isAdmin"]) {
+							echo '<li><a href="'.$page["url"].'">'.$page["title"].'</a>';
+							if ($current == $page["url"]) {
+								echo '<div class="arrow-down"></div>';
+							}
+							echo '</li>';
+						} elseif ($page["loggedIn"] && $userData) {
 							echo '<li><a href="'.$page["url"].'">'.$page["title"].'</a>';
 							if ($current == $page["url"]) {
 								echo '<div class="arrow-down"></div>';
