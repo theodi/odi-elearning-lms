@@ -90,6 +90,11 @@ function getUserStatusLink($pages) {
 	//$page['admin'] = true;
 	$page['loggedIn'] = true;
 	$pages[] = $page;
+	$page['url'] = '/learners/index.php';
+	$page['title'] = 'Learners';
+	$page["long_title"] = "Learner profiles";
+	$page['admin'] = true;
+	$pages[] = $page;
 	$page['url'] = '/admin/index.php';
 	$page['title'] = 'Admin';
 	$page["long_title"] = "LMS Administration";
