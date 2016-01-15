@@ -5,8 +5,8 @@
 	include('_includes/header.php');
 	$module = $_GET["module"];
 ?>
-<form action="" method="get" style="text-align: right; position: relative; bottom: 6.5em;">
-    <select name="module" style="height: 1.8em; font-size: 1.8em;">
+<form action="" method="get" style="text-align: right; position: relative; bottom: 5em; margin-bottom: -60px;">
+    <select name="module">
 <?php
 	for ($i=1;$i<14;$i++) {
         	echo '<option ';
@@ -17,7 +17,7 @@
 	}
 ?>
     </select>
-    <input type="submit" value="Go" style="padding: 0.2em 1em; font-size: 1.6em;"/>
+    <input type="submit" value="Go" style="padding: 0.2em 1em; position: relative; bottom: 5px;"/>
 </form>
 <?php
 	$path = "../";
