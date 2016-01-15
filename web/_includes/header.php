@@ -70,7 +70,7 @@ function getUserStatusLink($pages) {
 	return $pages;
 }
 
-	$site_title = "ODI LMS";
+	$site_title = "ODI Learning Management System";
 	$pages = [];
 	$page['url'] = '/';
 	$page['title'] = 'Home';
@@ -137,7 +137,7 @@ function getUserStatusLink($pages) {
 	<div class='navbar navbar-inverse navbar-static-top' id='topbar'>
 		<div class='container'>
 			<div class='navbar-inner'>
-				<h1>ODI LMS</h1>
+				<h1>ODI Learning Management System</h1>
 				<a class='brand' href='/admin'>
 					<img alt="Logo" src="/images/logo.png" />
 				</a>
