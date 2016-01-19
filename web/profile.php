@@ -56,8 +56,8 @@ function getModuleBadgeData($course) {
 	$los = $course["_learningOutcomes"];
 	for ($i=0;$i<count($los);$i++) {
 		$lo = $los[$i];
-		$badge[$lo["badge"]] += $lo["credit"];
-		$userBadgeCredits[$lo["badge"]] += $lo["credit"];
+		$badge[$lo["badge"]] += $lo["credits"];
+		$userBadgeCredits[$lo["badge"]] += $lo["credits"];
 	}
 	return $badge;
 	
