@@ -28,12 +28,13 @@ function coursesTable() {
         $output = '';
         foreach ($cursor as $doc) {
 		$output .= '<tr><td>' . $doc["title"] . '</td>';
-		$output .= '<td style="text-align: center;"><img src="/images/';
+		$output .= '<td style="text-align: center;"><img style="max-height: 40px;" src="/images/';
 		$output .= $doc["format"]; 
 		$output .= '.png"></img></td>';
 		$output .= '<td style="text-align: center;">';
-		if ($doc["_moduleId"]) {
-			$output .= '<a href="/dashboard/index.php?module=' . $doc["_moduleId"] . '"><img src="/images/dashboard.png" width="30px"/></a>';
+		if (substr($doc["id"],0,4) == "ODI_") {
+			$dashId = str_replace("ODI_","",$doc["id"]);
+			$output .= '<a href="/dashboard/index.php?module=' . $dashId . '"><img src="/images/dashboard.png" width="30px"/></a>';
 		} elseif ($tracking[$doc["slug"]]) {
 			$output .= '<a href="/dashboard/index.php?module=' . $tracking[$doc["slug"]] . '"><img src="/images/dashboard.png" width="30px"/></a>';
 		} 
