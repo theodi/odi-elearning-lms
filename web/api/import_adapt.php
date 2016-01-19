@@ -10,7 +10,11 @@ $url = $_GET["url"];
 
 $data = getCourseData($url);
 $data["id"] = getModuleId($url);
-store($data,$courses_collection);
+if ($data["title"] == "" || $data["id"] == "") {
+	echo "No data to import! Wrong URL?";
+} else {
+	store($data,$courses_collection);
+}
 
 function getCourseData($url) {
 	$dataUrl = $url . "/course/en/course.json";
