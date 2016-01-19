@@ -8,6 +8,6 @@
 	$doc = load($userData["email"]);
 	$doc = str_replace("．",".",$doc);
 	$data = json_decode($doc,true);
-	print_r($doc);
+	print_r($data);
 	include('_includes/footer.html');
 ?>
