@@ -25,7 +25,7 @@
 <h2>Add adapt course/module</h2>
 <section id="add_adapt_course">
 	Please enter the url of the course homepage in the box below, it must be publically accessible. (e.g. http://accelerate.theodi.org/en/module1 or http://training.theodi.org/inaday).<br/>
-	<input type="text" name="course_url"></input></br>
+	<input type="text" id="course_url"></input></br>
 	<button id="import_adapt_course">Import adapt course</button>
 </section>
 
