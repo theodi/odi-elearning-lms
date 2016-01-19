@@ -52,7 +52,7 @@ function import_adapt() {
 		return;
 	} 
 	$('#add_adapt_course').html('Please wait');
-	$.get('/api/import_adapt.php?url=' + url, function(data) {
+	$.get('/api/import_adapt.php?url=' + encodeURI(url), function(data) {
 		$('#add_adapt_course').html(data);
 	});
 }
