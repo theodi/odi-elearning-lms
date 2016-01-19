@@ -65,13 +65,13 @@ function getModuleBadgeData($course) {
 
 function renderProgress($course,$progress) {
 	echo $course["title"] . "<br/>";
-	$progress = json_decode($progress,true);
-	print_r($progress);
-	if ($progress["_isAssessmentPassed"] == "true" || $progress["_isCourseComplete"] == "true") {
+	$spoor = json_decode($progress,true);
+	$progress = $spoor["spoor"];
+	if ($progress["_isAssessmentPassed"] > 0 || $progress["_isCourseComplete"] > 0) {
 		$progress["completion"] = str_replace("0","1",$progress["completion"]);
 	}
 	echo $progress["completion"] . "<br/>";
-	if (substr_count($progress["completion"],0) < 1) {
+	if (substr_count($progress["completion"],0) < 1 && $progress["completion"] != "") {
 		$badgeData = getModuleBadgeData($course);
 		foreach ($badgeData as $badge => $credit) {
 			echo $badge . " : " . $credit . "<br/>";
