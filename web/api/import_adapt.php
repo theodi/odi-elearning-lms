@@ -10,10 +10,12 @@ $url = $_GET["url"];
 
 $data = getCourseData($url);
 $data["id"] = getModuleId($url);
+print_r($data);
 store($data,$courses_collection);
 
 function getCourseData($url) {
 	$dataUrl = $url . "/course/en/course.json";
+	echo $dataUrl;
 	$data = file_get_contents($dataUrl);
 	$data = json_decode($data,true);
 	return $data;
