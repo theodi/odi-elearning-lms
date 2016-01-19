@@ -66,6 +66,7 @@ function getModuleBadgeData($course) {
 function renderProgress($course,$progress) {
 	echo $course["title"] . "<br/>";
 	$progress = json_decode($progress,true);
+	print_r($progress);
 	if ($progress["_isAssessmentPassed"] == "true" || $progress["_isCourseComplete"] == "true") {
 		$progress["completion"] = str_replace("0","1",$progress["completion"]);
 	}
