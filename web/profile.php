@@ -6,6 +6,8 @@
 <?php
 	require_once('_includes/functions.php');
 	$doc = load($userData["email"]);
-	echo $doc;
+	$doc = str_replace("．",".",$doc);
+	$data = json_decode($doc,true);
+	print_r($doc);
 	include('_includes/footer.html');
 ?>
