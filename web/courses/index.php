@@ -24,8 +24,7 @@ function coursesTable() {
         // use the database we connected to
         $col = $m->selectDB($db_name)->selectCollection($courses_collection);
 
-        $query = array('format' => 'course');
-        $cursor = $col->find($query);
+        $cursor = $col->find();
         $output = '';
         foreach ($cursor as $doc) {
 		$output .= '<tr><td>' . $doc["title"] . '</td>';
