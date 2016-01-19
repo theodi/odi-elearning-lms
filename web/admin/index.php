@@ -21,6 +21,14 @@
 	Click below to update the list of courses from the publisher (theodi.org) data.
 	<button id="update_courses_button">Update courses from publisher</button>
 </section>
+
+<h2>Add adapt course/module</h2>
+<section id="add_adapt_course">
+	Please enter the url of the course homepage in the box below, it must be publically accessible. (e.g. http://accelerate.theodi.org/en/module1 or http://training.theodi.org/inaday).<br/>
+	<input type="text" name="course_url"></input></br>
+	<button id="import_adapt_course">Import adapt course</button>
+</section>
+
 <script>
 
 function archive_elearning() {
@@ -37,12 +45,27 @@ function update_courses() {
 	});
 }
 
+function import_adapt() {
+	url = $('#course_url').val();
+	if (url == "") {
+		alert("please enter a course url!");
+		return;
+	} 
+	$('#add_adapt_course').html('Please wait');
+	$.get('/api/import_adapt.php?url=' + url, function(data) {
+		$('#add_adapt_course').html(data);
+	});
+}
+
 function addListeners() {
 	$('#archive_elearning_button').on('click',function() {
 		archive_elearning();
 	});
 	$('#update_courses_button').on('click',function() {
 		update_courses();
+	});
+	$('#import_adapt_course').on('click',function() {
+		import_adapt();
 	});
 }
 
