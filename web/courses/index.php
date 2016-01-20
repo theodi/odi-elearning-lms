@@ -29,7 +29,11 @@ function coursesTable() {
    //$tracking["open-data-science"] = "ODS";
 
    foreach ($courses as $doc) {
-		$output .= '<tr><td>' . $doc["title"] . '</td>';
+   		if ($doc["web_url"]) {
+			$output .= '<tr><td><a target="_blank" href="'.$doc["web_url"].'">' . $doc["title"] . '</a></td>';
+		} else {
+			$output .= '<tr><td>' . $doc["title"] . '</td>';
+		}
 		$output .= '<td style="text-align: center;"><img style="max-height: 40px;" src="/images/';
 		$output .= $doc["format"]; 
 		$output .= '.png"></img></td>';
