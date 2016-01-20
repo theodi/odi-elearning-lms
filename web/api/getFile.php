@@ -1,9 +1,14 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
+session_start();
+if (!$userData["isAdmin"]){
+    header('Location: /401.php');
+    exit();
+}
 require '../../vendor/autoload.php';
 
 $debug = getenv("DEBUG");
-echo $debug;
+
 define('APPLICATION_NAME', 'Drive API PHP Quickstart');
 //define('CREDENTIALS_PATH', '~/.credentials/drive-php-quickstart.json');
 define('CLIENT_SECRET_PATH', '../../client_secret.json');
@@ -92,6 +97,7 @@ $url = "https://www.googleapis.com/drive/v3/files/".$fileId."/export?mimeType=te
 */
 if ($url) {
     header('Content-Type: text/csv');
+    header('Content-disposition: filename="data.csv"');
     echo downloadFile($client,$url);
 }
 
