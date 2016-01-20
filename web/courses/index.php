@@ -3,30 +3,31 @@
 	$path = "../";
 	set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 	include('_includes/header.php');
+	include('functions.php');
 	echo '<table style="width: 100%;">';
 	echo '<tr><th>Course name</th><th>Type</th><th>Dashboard</th></tr>';
 	echo coursesTable();
 	echo '</table>';
 	include('_includes/footer.html');
 
-
 function coursesTable() {
-   global $connection_url, $db_name, $courses_collection;
+   global $courses_collection;
+
+   $courses = get_data_from_collection($courses_collection);
+   $courseIdentifiers = get_data_from_collection("courseIdentifiers");
+   foreach ($courseIdentifiers as $doc) {
+   	foreach ($doc as $key => $value) {
+   		for($i=0;$i<count($value);$i++) {
+   			$tracking[$value[$i]] = $key;
+   		}
+   	}
+   }
 
    // Put in google spreadsheet
-   $tracking["open-data-day"] = "InADay";
-   $tracking["open-data-science"] = "ODS";
+   //$tracking["open-data-day"] = "InADay";
+   //$tracking["open-data-science"] = "ODS";
 
-   try {
-         // create the mongo connection object
-        $m = new MongoClient($connection_url);
-
-        // use the database we connected to
-        $col = $m->selectDB($db_name)->selectCollection($courses_collection);
-
-        $cursor = $col->find();
-        $output = '';
-        foreach ($cursor as $doc) {
+   foreach ($courses as $doc) {
 		$output .= '<tr><td>' . $doc["title"] . '</td>';
 		$output .= '<td style="text-align: center;"><img style="max-height: 40px;" src="/images/';
 		$output .= $doc["format"]; 
@@ -40,19 +41,7 @@ function coursesTable() {
 		} 
 		$output .= '</td>';
 		$output .= '</tr>';
-        }
-        $m->close();
-        return $output;
-
-   } catch ( MongoConnectionException $e ) {
-//      return false;
-        syslog(LOG_ERR,'Error connecting to MongoDB server ' . $connection_url . ' - ' . $db_name . ' <br/> ' . $e->getMessage());
-   } catch ( MongoException $e ) {
-//      return false;
-        syslog(LOG_ERR,'Mongo Error: ' . $e->getMessage());
-   } catch ( Exception $e ) {
-//      return false;
-        syslog(LOG_ERR,'Error: ' . $e->getMessage());
    }
+   return $output;
 }
 ?>

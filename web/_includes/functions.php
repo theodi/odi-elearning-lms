@@ -1,5 +1,33 @@
 <?php
 
+function get_data_from_collection($collection) {
+   global $connection_url, $db_name;
+   try {
+	 // create the mongo connection object
+	$m = new MongoClient($connection_url);
+
+	// use the database we connected to
+	$col = $m->selectDB($db_name)->selectCollection($collection);
+	
+	$cursor = $col->find();
+	
+	return $cursor;
+		
+	$m->close();
+
+	return $doneCount;
+   } catch ( MongoConnectionException $e ) {
+	syslog(LOG_ERR,'Error connecting to MongoDB server ' . $connection_url . ' - ' . $db_name . ' <br/> ' . $e->getMessage());
+	return false;
+   } catch ( MongoException $e ) {
+	syslog(LOG_ERR,'Mongo Error: ' . $e->getMessage());
+	return false;
+   } catch ( Exception $e ) {
+	syslog(LOG_ERR,'Error: ' . $e->getMessage());
+	return false;
+   }
+}
+
 function archive_empty_profiles() {
    global $connection_url, $db_name, $collection;
    try {
@@ -74,5 +102,4 @@ function load($email) {
 	syslog(LOG_ERR,'Error: ' . $e->getMessage());
    }
 }
-
 ?>
