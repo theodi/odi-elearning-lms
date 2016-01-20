@@ -5,12 +5,14 @@ function getCoursesData() {
 	$cursor = get_data_from_collection($courses_collection);
 	$tracking = get_course_identifiers();
 	$courses = "";
-	
 	foreach ($cursor as $doc) {
    		if ($doc["slug"]) {
 			$id = $doc["slug"];
 		} else {
 			$id = $doc["id"];
+		}
+		if (substr($id,0,4) == "ODI_") {
+			$id = substr($id,5,strlen($id));
 		}
 		if ($tracking[$id]) {
 			$id = $tracking[$id];
