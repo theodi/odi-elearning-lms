@@ -47,8 +47,10 @@ if ($client->getAccessToken()) {
   $suffix = substr($email,strrpos($email,"@")+1,strlen($email));
   if ($suffix == "theodi.org") {
 	$userData["isAdmin"] = true;
+	$_SESSION["isAdmin"] = true;
   } else {
 	$userData["isAdmin"] = false;
+	$_SESSION["isAdmin"] = false;
   }
   $_SESSION['userData'] = $userData;
   $_SESSION['access_token'] = $client->getAccessToken();
