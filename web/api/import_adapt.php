@@ -9,7 +9,8 @@ include('_includes/api-header.php');
 $url = $_GET["url"];
 
 $data = getCourseData($url);
-$data["id"] = getModuleId($url);
+$data["_id"] = getModuleId($url);
+$data["id"] = $data["_id"];
 if ($data["title"] == "" || $data["id"] == "") {
 	echo "No data to import! Wrong URL?";
 } else {
