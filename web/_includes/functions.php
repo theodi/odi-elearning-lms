@@ -3,7 +3,7 @@
 function getCoursesData() {
 	global $courses_collection;
 	$cursor = get_data_from_collection($courses_collection);
-	$matches = get_course_identifiers();
+	$tracking = get_course_identifiers();
 	$courses = "";
 	
 	foreach ($cursor as $doc) {
