@@ -80,6 +80,7 @@ echo "Got to stage 2\n";
 $fileId = '17gtugoN05aYnWN07Exf6_RpdknlpCfi6a1WSTyJ_z7c';
 $file = $service->files->get($fileId);
 $url = $file->getExportLinks()["text/csv"];
+echo "Got a download url of " . $url . "<br/>\n";
 //$url = $file->getSelfLink() . "/export?format=csv&gid=0";
 /*
 echo $url;
