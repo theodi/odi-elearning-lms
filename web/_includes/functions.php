@@ -5,27 +5,21 @@ function getCoursesData() {
 	$cursor = get_data_from_collection($courses_collection);
 	$tracking = get_course_identifiers();
 	$courses = "";
-	print_r($tracking);
 	foreach ($cursor as $doc) {
    		if ($doc["slug"]) {
 			$id = $doc["slug"];
 		} else {
 			$id = $doc["id"];
 		}
-		echo "Looking for match for " . $id . "<br/>\n";
 		if ($tracking[$id]) {
-			echo "Switching to new ID" . $tracking[$id] . "<br/>\n";
 			$id = $tracking[$id];
 		}
 		if ($courses[$id] != "") {
-			echo "merging<br/>\n";
 			$courses[$id] = array_merge($courses[$id],$doc);
 		} else {
-			echo "plain output<br/>\n";
 			$courses[$id] = $doc;
 		}
 	}
-	exit();
 	return $courses;
 }
 
