@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
-if (!$userData["isAdmin"]){
+if (!$_SESSION["userData"]["isAdmin"]){
     header('Location: /401.php');
     exit();
 }
