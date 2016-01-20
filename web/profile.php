@@ -1,34 +1,7 @@
 <?php
 	$location = "profile.php";
 	include('_includes/header.php');
-
-
-function getCoursesData() {
-   global $connection_url, $db_name, $courses_collection;
-   try {
-         // create the mongo connection object
-        $m = new MongoClient($connection_url);
-
-        // use the database we connected to
-        $col = $m->selectDB($db_name)->selectCollection($courses_collection);
-
-        $cursor = $col->find();
-	$courses = "";
-        foreach ($cursor as $doc) {
-		if ($doc["slug"]) {
-			$id = $doc["slug"];
-		} else {
-			$id = $doc["id"];
-		}
-		$courses[$id] = $doc;
-        }
-        $m->close();
-        return $courses;
-
-   } catch ( Exception $e ) {
-   	return [];	
-   }
-}
+	include('_includes/functions.php');
 
 function getProfileData($email) {
 	$doc = load($userData["email"]);

@@ -29,6 +29,13 @@ function coursesTable() {
    //$tracking["open-data-science"] = "ODS";
 
    foreach ($courses as $doc) {
+   		$courseId = $doc["id"];
+   		if ($doc["slug"]) {
+   			$courseId = $doc["slug"]
+   		}
+   		if ($tracking[$courseId]) {
+   			$courseId = $tracking[$courseId];
+   		}
    		if ($doc["web_url"]) {
 			$output .= '<tr><td><a target="_blank" href="'.$doc["web_url"].'">' . $doc["title"] . '</a></td>';
 		} else {
@@ -45,8 +52,15 @@ function coursesTable() {
 			$output .= '<a href="/dashboard/index.php?module=' . $tracking[$doc["slug"]] . '"><img src="/images/dashboard.png" width="30px"/></a>';
 		} 
 		$output .= '</td>';
+		outputCredits($courseId)
 		$output .= '</tr>';
    }
    return $output;
 }
+
+function outputCredits($courseId) {
+	$data = get_course_credits_by_badge($courseId);
+	print_r($data);
+}
+
 ?>

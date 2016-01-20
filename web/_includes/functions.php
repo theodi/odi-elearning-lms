@@ -1,5 +1,36 @@
 <?php
 
+function getCoursesData() {
+	global $courses_collection;
+	$cursor = get_data_from_collection($courses_collection);
+	$courses = "";
+	
+	foreach ($cursor as $doc) {
+   	if ($doc["slug"]) {
+			$id = $doc["slug"];
+		} else {
+			$id = $doc["id"];
+		}
+		$courses[$id] = $doc;
+    }
+    return $courses;
+}
+
+function get_course_credits_by_badge($id) {
+	$course = get_course_by_id($id);
+	$los = $course["_learningOutcomes"];
+	for ($i=0;$i<count($los);$i++) {
+		$lo = $los[$i];
+		$badge[$lo["badge"]] += $lo["credits"];
+	}
+	return $badge;
+}
+
+function get_course_by_id($id) {
+	$courses = getCoursesData();
+	return $courses[$id];
+}
+
 function get_data_from_collection($collection) {
    global $connection_url, $db_name;
    try {
@@ -12,7 +43,7 @@ function get_data_from_collection($collection) {
 	$cursor = $col->find();
 	
 	return $cursor;
-		
+
 	$m->close();
 
 	return $doneCount;
