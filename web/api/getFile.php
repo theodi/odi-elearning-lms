@@ -1,10 +1,6 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 require '../../vendor/autoload.php';
-$location = "/api/update_courses.php";
-$path = "../";
-set_include_path(get_include_path() . PATH_SEPARATOR . $path);
-include('_includes/api-header.php');
 
 $debug = getenv("DEBUG");
 
