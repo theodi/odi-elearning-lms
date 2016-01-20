@@ -4,7 +4,7 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 define('APPLICATION_NAME', 'Drive API PHP Quickstart');
 //define('CREDENTIALS_PATH', '~/.credentials/drive-php-quickstart.json');
-define('CLIENT_SECRET_PATH', '../../client_secret.json');
+define('CLIENT_SECRET_PATH', '/../../client_secret.json');
 define('SCOPES', implode(' ', array(
   Google_Service_Drive::DRIVE_READONLY)
 ));
@@ -57,10 +57,13 @@ function getClient() {
   return $client;
 }
 
-
+echo "Got to stage 1\n";
 // Get the API client and construct the service object.
 $client = getClient();
 $service = new Google_Service_Drive($client);
+
+echo "Got to stage 2\n";
+exit();
 
 //2015 people trained spreadsheet
 //$fileId = '1aFdYjtPYKWjL8yYyVeByQlLbNEehS0N3VKADpZiZoug';
