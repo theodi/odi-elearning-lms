@@ -69,7 +69,7 @@ function getClient() {
   return $client;
 }
 
-if ($debug) { cho "Got to stage 1\n";}
+if ($debug) { echo "Got to stage 1\n";}
 // Get the API client and construct the service object.
 $client = getClient();
 $service = new Google_Service_Drive($client);
