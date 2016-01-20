@@ -8,7 +8,7 @@ if (!$_SESSION["userData"]["isAdmin"]){
 require '../../vendor/autoload.php';
 
 $debug = getenv("DEBUG");
-
+$debug = true;
 define('APPLICATION_NAME', 'Drive API PHP Quickstart');
 //define('CREDENTIALS_PATH', '~/.credentials/drive-php-quickstart.json');
 define('CLIENT_SECRET_PATH', '../../client_secret.json');
