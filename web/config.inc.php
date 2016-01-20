@@ -5,7 +5,7 @@
 	$collection = getenv("MONGOLAB_COLLECTION");
 	$mandrill_key = getenv("MANDRILL_KEY");
 	$eLearning_prefix = getenv("ELEARNING_PREFIX");
-        $client_id = getenv("GOOGLE_OAUTH_ID");
+    $client_id = getenv("GOOGLE_OAUTH_ID");
  	$client_secret = getenv("GOOGLE_OAUTH_SECRET");
  	$redirect_uri = getenv("GOOGLE_REDIRECT_URI");
 	$courses_collection = getenv("MONGOLAB_COURSES");
