@@ -18,9 +18,7 @@ function coursesTable() {
    foreach ($courseIdentifiers as $doc) {
    	foreach ($doc as $key => $value) {
    		for($i=0;$i<count($value);$i++) {
-   			if (is_string($value[$i]) && is_string($key)) {
-	   			$tracking[$value[$i]] = $key;
-	   		}
+	   		$tracking[(string) $value[$i]] = (string) $key;
    		}
    	}
    }
