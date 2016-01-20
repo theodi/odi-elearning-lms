@@ -1,7 +1,8 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
-print_r($_SESSION);
+$userData = $_SESSION["userData"];
+print_r($userData);
 //if (!$_SESSION["userData"]["isAdmin"]){
 //    header('Location: /401.php');
 //    exit();
