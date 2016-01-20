@@ -8,6 +8,7 @@ if (!$_SESSION["isAdmin"]){
 require '../../vendor/autoload.php';
 
 $debug = false;
+$fileId = $_GET["fileId"];
 
 define('APPLICATION_NAME', 'Drive API PHP Quickstart');
 //define('CREDENTIALS_PATH', '~/.credentials/drive-php-quickstart.json');
@@ -84,7 +85,6 @@ if ($debug) { echo "Got to stage 2\n";}
 //2015 people trained spreadsheet
 //$fileId = '1aFdYjtPYKWjL8yYyVeByQlLbNEehS0N3VKADpZiZoug';
 //LMS identifiers
-$fileId = '17gtugoN05aYnWN07Exf6_RpdknlpCfi6a1WSTyJ_z7c';
 $file = $service->files->get($fileId);
 $url = $file->getExportLinks()["text/csv"];
 if ($debug) { echo "Got a download url of " . $url . "<br/>\n";}
