@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
-$userData = $_SESSION["userData"];
+$userData = unserialize($_SESSION["userData"]);
 print_r($userData);
 print_r($userData["modelData:protected"]);
 //if ($userData["modelData:protected"]["isAdmin"] != 1) {
