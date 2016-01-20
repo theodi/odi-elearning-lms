@@ -18,14 +18,21 @@ define('SCOPES', implode(' ', array(
  * @return Google_Client the authorized client object
  */
 function getClient() {
+  echo "get client <br/>";
   $client = new Google_Client();
+  echo "set a client <br/>";
   $client->setApplicationName(APPLICATION_NAME);
+  echo "set application name <br/>";
   $client->setScopes(SCOPES);
+  echo "set scopes <br/>";
   $client->setAuthConfigFile(CLIENT_SECRET_PATH);
+  echo "set client secret <br/>";
   $client->setAccessType('offline');
+  echo "set access type <br/>";
 
   // Load previously authorized credentials from a file.
   $accessToken = getenv("ODI_DRIVE_TOKEN");
+  echo "got access token : " . $accessToken . "<br/>";
   if ($accessToken != "") {
   } else {
     echo "No access token, please speak to a site admin!";
@@ -48,11 +55,15 @@ function getClient() {
     printf("Credentials saved to %s\n", $credentialsPath);
   }
   $client->setAccessToken($accessToken);
+  echo "set access token <br/>";
 
   // Refresh the token if it's expired.
   if ($client->isAccessTokenExpired()) {
+    echo "need refresh token <br/>";
     $client->refreshToken($client->getRefreshToken());
+    echo "got refrest token <br/>";
     putenv("ODI_DRIVE_TOKEN=".$client->getAccessToken());
+    echo "set access token<br/>";
   }
   return $client;
 }
