@@ -14,6 +14,7 @@ function getCoursesData() {
 		}
 		echo "Looking for match for " . $id . "<br/>\n";
 		if ($tracking[$id]) {
+			echo "Switching to new ID" . $tracking[$id] . "<br/>\n";
 			$id = $tracking[$id];
 		}
 		if ($courses[$id] != "") {
