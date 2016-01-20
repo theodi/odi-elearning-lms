@@ -3,17 +3,38 @@
 function getCoursesData() {
 	global $courses_collection;
 	$cursor = get_data_from_collection($courses_collection);
+	$matches = get_course_identifiers();
 	$courses = "";
 	
 	foreach ($cursor as $doc) {
-   	if ($doc["slug"]) {
+   		if ($doc["slug"]) {
 			$id = $doc["slug"];
 		} else {
 			$id = $doc["id"];
 		}
-		$courses[$id] = $doc;
-    }
-    return $courses;
+		if ($tracking[$id]) {
+			$id = $tracking[$id];
+		}
+		if ($courses[$id] != "") {
+			$courses[$id] = array_merge($courses[$id],$doc);
+		} else {
+			$courses[$id] = $doc;
+		}
+	}
+	return $courses;
+}
+
+function get_course_identifiers() {
+    $courseIdentifiers = get_data_from_collection("courseIdentifiers");
+    foreach ($courseIdentifiers as $doc) {
+   		$doc = $doc["identifiers"];
+   		foreach ($doc as $key => $value) {
+   			for($i=0;$i<count($value);$i++) {
+	 	  		$tracking[$value[$i]] = $key;
+   			}
+   		}
+   	}
+   	return $tracking;
 }
 
 function get_course_credits_by_badge($id) {
