@@ -1,10 +1,10 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
-require __DIR__ . '/../../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 define('APPLICATION_NAME', 'Drive API PHP Quickstart');
 //define('CREDENTIALS_PATH', '~/.credentials/drive-php-quickstart.json');
-define('CLIENT_SECRET_PATH', '/../../client_secret.json');
+define('CLIENT_SECRET_PATH', '../../client_secret.json');
 define('SCOPES', implode(' ', array(
   Google_Service_Drive::DRIVE_READONLY)
 ));
@@ -18,25 +18,24 @@ define('SCOPES', implode(' ', array(
  * @return Google_Client the authorized client object
  */
 function getClient() {
-  echo "get client <br/>";
+  echo "get client <br/>\n";
   $client = new Google_Client();
-  echo "set a client <br/>";
+  echo "set a client <br/>\n";
   $client->setApplicationName(APPLICATION_NAME);
-  echo "set application name <br/>";
+  echo "set application name <br/>\n";
   $client->setScopes(SCOPES);
-  echo "set scopes <br/>";
+  echo "set scopes <br/>\n";
   $client->setAuthConfigFile(CLIENT_SECRET_PATH);
-  echo "set client secret <br/>";
+  echo "set client secret <br/>\n";
   $client->setAccessType('offline');
-  echo "set access type <br/>";
+  echo "set access type <br/>\n";
 
   // Load previously authorized credentials from a file.
   $accessToken = getenv("ODI_DRIVE_TOKEN");
-  echo "got access token : " . $accessToken . "<br/>";
+  echo "got access token : " . $accessToken . "<br/>\n";
   if ($accessToken != "") {
   } else {
     echo "No access token, please speak to a site admin!";
-    return;
     // Request authorization from the user.
     $authUrl = $client->createAuthUrl();
     printf("Open the following link in your browser:\n%s\n", $authUrl);
@@ -55,15 +54,15 @@ function getClient() {
     printf("Credentials saved to %s\n", $credentialsPath);
   }
   $client->setAccessToken($accessToken);
-  echo "set access token <br/>";
+  echo "set access token <br/>\n";
 
   // Refresh the token if it's expired.
   if ($client->isAccessTokenExpired()) {
-    echo "need refresh token <br/>";
+    echo "need refresh token <br/>\n";
     $client->refreshToken($client->getRefreshToken());
-    echo "got refrest token <br/>";
+    echo "got refrest token <br/>\n";
     putenv("ODI_DRIVE_TOKEN=".$client->getAccessToken());
-    echo "set access token<br/>";
+    echo "set access token<br/>\n";
   }
   return $client;
 }
@@ -74,7 +73,6 @@ $client = getClient();
 $service = new Google_Service_Drive($client);
 
 echo "Got to stage 2\n";
-exit();
 
 //2015 people trained spreadsheet
 //$fileId = '1aFdYjtPYKWjL8yYyVeByQlLbNEehS0N3VKADpZiZoug';
