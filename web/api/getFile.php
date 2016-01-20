@@ -1,18 +1,14 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
-$userData = unserialize($_SESSION["userData"]);
-print_r($userData);
-print_r($userData["modelData:protected"]);
-//if ($userData["modelData:protected"]["isAdmin"] != 1) {
-//if (!$_SESSION["userData"]["isAdmin"]){
-//    header('Location: /401.php');
-//    exit();
-//}
+if (!$_SESSION["isAdmin"]){
+    header('Location: /401.php');
+    exit();
+}
 require '../../vendor/autoload.php';
 
 $debug = getenv("DEBUG");
-$debug = true;
+
 define('APPLICATION_NAME', 'Drive API PHP Quickstart');
 //define('CREDENTIALS_PATH', '~/.credentials/drive-php-quickstart.json');
 define('CLIENT_SECRET_PATH', '../../client_secret.json');
