@@ -1,0 +1,22 @@
+#course_credits_box {
+    width: 150px;
+    border-radius: 5px;
+    background-color: lightblue;
+    padding: 5px;
+    height: 50px;
+}
+score {
+   float: left;
+   font-size: 2em;
+   text-align: center;
+   width: 50px;
+   padding-top: 0.6em;
+}
+#course_credits_table {
+   width: 60px;
+   float: right;
+   font-size: 0.7em;
+}
+#course_credits_table tr {
+   line-height: 1.2em;
+}

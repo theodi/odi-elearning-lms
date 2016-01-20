@@ -132,6 +132,7 @@ function getUserStatusLink($pages) {
 <link href="http://assets.theodi.org/css/odi-bootstrap-pomegranate.css" rel="stylesheet">
 <link href="http://assets.theodi.org/css/odi-bootstrap-red.css" rel="stylesheet">-->
 <link href="http://assets.theodi.org/css/odi-bootstrap.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
 <link rel="shortcut icon" href="/images/odifavicon32.ico">
 </head>
 <body>
