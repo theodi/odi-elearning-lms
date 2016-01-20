@@ -2,12 +2,11 @@
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
 $userData = $_SESSION["userData"];
-print_r($userData);
+if ($userData["modelData:protected"]["isAdmin"] != 1) {
 //if (!$_SESSION["userData"]["isAdmin"]){
-//    header('Location: /401.php');
-//    exit();
-//}
-exit();
+    header('Location: /401.php');
+    exit();
+}
 require '../../vendor/autoload.php';
 
 $debug = getenv("DEBUG");
