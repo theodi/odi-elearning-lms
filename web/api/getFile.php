@@ -3,7 +3,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 require '../../vendor/autoload.php';
 
 $debug = getenv("DEBUG");
-
+echo $debug;
 define('APPLICATION_NAME', 'Drive API PHP Quickstart');
 //define('CREDENTIALS_PATH', '~/.credentials/drive-php-quickstart.json');
 define('CLIENT_SECRET_PATH', '../../client_secret.json');
