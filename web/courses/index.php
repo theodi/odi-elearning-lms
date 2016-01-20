@@ -41,7 +41,7 @@ function coursesTable() {
 		} else {
 			$output .= '<tr><td>' . $doc["title"] . '</td>';
 		}
-     	$output .= '<td style="text-align: center;>';
+     	$output .= '<td style="text-align: center;">';
 		$output .= outputCredits($courseId);
 		$output .= '</td>';
 		$output .= '<td style="text-align: center;"><img style="max-height: 40px;" src="/images/';
