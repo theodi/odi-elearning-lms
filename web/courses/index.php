@@ -41,6 +41,9 @@ function coursesTable() {
 		} else {
 			$output .= '<tr><td>' . $doc["title"] . '</td>';
 		}
+     	$output .= '<td style="text-align: center;>';
+		$output .= outputCredits($courseId);
+		$output .= '</td>';
 		$output .= '<td style="text-align: center;"><img style="max-height: 40px;" src="/images/';
 		$output .= $doc["format"]; 
 		$output .= '.png"></img></td>';
@@ -52,7 +55,6 @@ function coursesTable() {
 			$output .= '<a href="/dashboard/index.php?module=' . $tracking[$doc["slug"]] . '"><img src="/images/dashboard.png" width="30px"/></a>';
 		} 
 		$output .= '</td>';
-		outputCredits($courseId);
 		$output .= '</tr>';
    }
    return $output;
@@ -60,7 +62,15 @@ function coursesTable() {
 
 function outputCredits($courseId) {
 	$data = get_course_credits_by_badge($courseId);
+	$rows = "";
+	foreach ($data as $key => $value) {
+		$total += $value;
+		$rows .= "<tr><td>" . $key . "</td><td>" . $value . '</td></tr>';
+	}
 	print_r($data);
+	$box = '<div id="course_credits_box"><score>' . $total .' </score><table id="course_credits_table">';
+	$box .= $rows;
+	$box .= '</table></div>';
 }
 
 ?>
