@@ -31,7 +31,7 @@ function coursesTable() {
    foreach ($courses as $doc) {
    		$courseId = $doc["id"];
    		if ($doc["slug"]) {
-   			$courseId = $doc["slug"]
+   			$courseId = $doc["slug"];
    		}
    		if ($tracking[$courseId]) {
    			$courseId = $tracking[$courseId];
@@ -52,7 +52,7 @@ function coursesTable() {
 			$output .= '<a href="/dashboard/index.php?module=' . $tracking[$doc["slug"]] . '"><img src="/images/dashboard.png" width="30px"/></a>';
 		} 
 		$output .= '</td>';
-		outputCredits($courseId)
+		outputCredits($courseId);
 		$output .= '</tr>';
    }
    return $output;
