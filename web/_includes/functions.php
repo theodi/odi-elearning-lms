@@ -19,7 +19,7 @@ function getCoursesData() {
 function get_course_credits_by_badge($id) {
 	$badge["explorer"] = 0;
 	$badge["strategist"] = 0;
-	$badge["practicioner"] = 0;
+	$badge["practitioner"] = 0;
 	$badge["pioneer"] = 0;
 	$course = get_course_by_id($id);
 	$los = $course["_learningOutcomes"];
