@@ -11,31 +11,24 @@
 	include('_includes/footer.html');
 
 function coursesTable() {
-   global $courses_collection;
+   // global $courses_collection;
 
-   $courses = get_data_from_collection($courses_collection);
-   $courseIdentifiers = get_data_from_collection("courseIdentifiers");
-   foreach ($courseIdentifiers as $doc) {
-   	$doc = $doc["identifiers"];
-   	foreach ($doc as $key => $value) {
-   		for($i=0;$i<count($value);$i++) {
-	   		$tracking[$value[$i]] = $key;
-   		}
-   	}
-   }
-
+   $courses = getCoursesData();
+   
    // Put in google spreadsheet
    //$tracking["open-data-day"] = "InADay";
    //$tracking["open-data-science"] = "ODS";
 
    foreach ($courses as $doc) {
    		$courseId = $doc["id"];
-   		if ($doc["slug"]) {
+   		/*
+	   	if ($doc["slug"]) {
    			$courseId = $doc["slug"];
    		}
    		if ($tracking[$courseId]) {
    			$courseId = $tracking[$courseId];
    		}
+   		*/
    		if ($doc["web_url"]) {
 			$output .= '<tr><td><a target="_blank" href="'.$doc["web_url"].'">' . $doc["title"] . '</a></td>';
 		} else {
