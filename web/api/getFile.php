@@ -6,6 +6,7 @@ print_r($_SESSION);
 //    header('Location: /401.php');
 //    exit();
 //}
+exit();
 require '../../vendor/autoload.php';
 
 $debug = getenv("DEBUG");
