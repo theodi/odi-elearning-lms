@@ -3,7 +3,7 @@
     border-radius: 5px;
     background-color: lightblue;
     padding: 5px;
-    height: 50px;
+    height: 55px;
 }
 score {
    float: left;
@@ -16,6 +16,7 @@ score {
    width: 60px;
    float: right;
    font-size: 0.7em;
+   text-align: right;
 }
 #course_credits_table tr {
    line-height: 1.2em;

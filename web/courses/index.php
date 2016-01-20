@@ -5,7 +5,7 @@
 	include('_includes/header.php');
 	include('_includes/functions.php');
 	echo '<table style="width: 100%;">';
-	echo '<tr><th>Course name</th><th>Credits</th><th>Type</th><th>Dashboard</th></tr>';
+	echo '<tr><th>Course name</th><th style="width:150px;">Credits</th><th>Type</th><th>Dashboard</th></tr>';
 	echo coursesTable();
 	echo '</table>';
 	include('_includes/footer.html');
