@@ -5,7 +5,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 //    header('Location: /401.php');
 //    exit();
 //}
-require '~/vendor/autoload.php';
+require 'vendor/autoload.php';
 //$fileId = $_GET["fileId"];
 
 define('APPLICATION_NAME', 'Drive API PHP Quickstart');
