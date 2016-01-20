@@ -17,10 +17,10 @@ function coursesTable() {
    $courseIdentifiers = get_data_from_collection("courseIdentifiers");
    foreach ($courseIdentifiers as $doc) {
    	foreach ($doc as $key => $value) {
-   		if (is_string($key)) {
-   			for($i=0;$i<count($value);$i++) {
+   		for($i=0;$i<count($value);$i++) {
+   			if (is_string($value[$i]) && is_string($key)) {
 	   			$tracking[$value[$i]] = $key;
-   			}
+	   		}
    		}
    	}
    }
