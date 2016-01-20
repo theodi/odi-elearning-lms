@@ -16,6 +16,7 @@ function getCoursesData() {
 		}
 		if ($courses[$id] != "") {
 			$courses[$id] = array_merge($courses[$id],$doc);
+			$courses[$id]["id"] = $id;
 		} else {
 			$courses[$id] = $doc;
 		}
