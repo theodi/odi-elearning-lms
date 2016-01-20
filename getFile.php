@@ -10,7 +10,7 @@ require 'vendor/autoload.php';
 
 define('APPLICATION_NAME', 'Drive API PHP Quickstart');
 //define('CREDENTIALS_PATH', '~/.credentials/drive-php-quickstart.json');
-define('CLIENT_SECRET_PATH', '../client_secret.json');
+define('CLIENT_SECRET_PATH', '../../client_secret.json');
 define('SCOPES', implode(' ', array(
   Google_Service_Drive::DRIVE_READONLY)
 ));
