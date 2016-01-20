@@ -16,8 +16,6 @@ define('SCOPES', implode(' ', array(
 ));
 
 $fileId = $argv[1];
-echo getcwd();
-echo $fileId;
 $debug = false;
 echo getFile($fileId);
 
