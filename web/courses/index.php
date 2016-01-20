@@ -5,7 +5,7 @@
 	include('_includes/header.php');
 	include('_includes/functions.php');
 	echo '<table style="width: 100%;">';
-	echo '<tr><th>Course name</th><th>Type</th><th>Dashboard</th></tr>';
+	echo '<tr><th>Course name</th><th>Credits</th><th>Type</th><th>Dashboard</th></tr>';
 	echo coursesTable();
 	echo '</table>';
 	include('_includes/footer.html');
@@ -67,10 +67,10 @@ function outputCredits($courseId) {
 		$total += $value;
 		$rows .= "<tr><td>" . $key . "</td><td>" . $value . '</td></tr>';
 	}
-	print_r($data);
 	$box = '<div id="course_credits_box"><score>' . $total .' </score><table id="course_credits_table">';
 	$box .= $rows;
 	$box .= '</table></div>';
+	return $box;
 }
 
 ?>
