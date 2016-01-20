@@ -29,6 +29,12 @@
 	<button id="import_adapt_course">Import adapt course</button>
 </section>
 
+<h2>Update course identifiers</h2>
+<section id="update_identifiers">
+	Click the button below to update the mapping of all the different course identifiers. <br/>
+	<button id="update_identifiers_button">Update course identifiers</button>
+</section>
+
 <script>
 
 function archive_elearning() {
@@ -42,6 +48,13 @@ function update_courses() {
 	$('#update_courses').html('Please wait');
 	$.get('/api/update_courses.php',function(data) {
 		$('#update_courses').html(data);
+	});
+}
+
+function update_identifiers() {
+	$('#update_identifiers').html('Please wait');
+	$.get('/api/update_course_identifiers.php',function(data) {
+		$('#update_identifiers').html(data);
 	});
 }
 
@@ -63,6 +76,9 @@ function addListeners() {
 	});
 	$('#update_courses_button').on('click',function() {
 		update_courses();
+	});
+	$('#update_identifiers_button').on('click',function() {
+		update_identifiers();
 	});
 	$('#import_adapt_course').on('click',function() {
 		import_adapt();
