@@ -8,7 +8,7 @@ include('_includes/api-header.php');
 
 $data = getCourseIdentifierData();
 
-$all = prepareData($data);
+$all["identifiers"] = prepareData($data);
 $all["id"] = "CourseIdentifiers";
 $all["title"] = "Course Identifiers";
 //print_r($all);
