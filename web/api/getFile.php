@@ -1,10 +1,11 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
-if (!$_SESSION["userData"]["isAdmin"]){
-    header('Location: /401.php');
-    exit();
-}
+print_r($_SESSION);
+//if (!$_SESSION["userData"]["isAdmin"]){
+//    header('Location: /401.php');
+//    exit();
+//}
 require '../../vendor/autoload.php';
 
 $debug = getenv("DEBUG");
