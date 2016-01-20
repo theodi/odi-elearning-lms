@@ -14,6 +14,7 @@ function coursesTable() {
    // global $courses_collection;
 
    $courses = getCoursesData();
+   print_r($courses);
    
    // Put in google spreadsheet
    //$tracking["open-data-day"] = "InADay";
