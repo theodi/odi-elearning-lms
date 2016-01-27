@@ -4,6 +4,7 @@
 	include('_includes/functions.php');
 
 function getProfileData() {
+	global $userData;
 	$doc = load($userData["email"]);
 	print_r($userData["email"]);
 	$doc = str_replace("．",".",$doc);
