@@ -86,6 +86,10 @@ function getUserStatusLink($pages) {
 	$page['title'] = 'Dashboards';
 	$page['long_title'] = "Dashboards";
 	$pages[] = $page;
+	$page['url'] = '/dashboard/trained.php';
+	$page['title'] = 'Overview';
+	$page['long_title'] = "Overview stats";
+	$pages[] = $page;
 	$page['url'] = '/profile.php';
 	$page['title'] = 'Profile';
 	$page["long_title"] = "Your profile";
