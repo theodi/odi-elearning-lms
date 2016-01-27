@@ -129,6 +129,9 @@ function archive_empty_profiles() {
    }
 }
 function load($email) {
+   if ($email == "" || !$email) {
+	return null;
+   }
    $email = str_replace('.','．',$email);
    global $connection_url, $db_name, $collection;
    try {
@@ -205,5 +208,6 @@ function outputCreditsTable($data) {
 	$box .= '</table></div>';
 	return $box;
 }
+
 
 ?>
