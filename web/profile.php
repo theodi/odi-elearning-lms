@@ -7,6 +7,7 @@ function getProfileData($email) {
 	$doc = load($userData["email"]);
 	$doc = str_replace("．",".",$doc);
 	$data = json_decode($doc,true);
+	print_r($data);
 	$user = getProfile($data);
 	return $user;
 }
@@ -62,8 +63,7 @@ function getModuleBadgeData($course) {
 		$badge[$lo["badge"]] += $lo["credits"];
 		$userBadgeCredits[$lo["badge"]] += $lo["credits"];
 	}
-	return $badge;
-	
+	return $badge;	
 }
 
 function getProgress($course,$progress) {
