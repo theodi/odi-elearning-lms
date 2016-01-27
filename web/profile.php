@@ -21,17 +21,18 @@ function getProfile($user) {
 			if ($courses[$course]) {
 				$courses[$course]["progress"] = getProgress($courses[$course],$progress);
 				if ($courses[$course]["progress"] > 99) {
-					$ret["complete"][] = $courses[$course];
+					$user["complete"][] = $courses[$course];
 				} else {
-					$ret["in_progress"][] = $courses[$course];
+					$user["in_progress"][] = $courses[$course];
 				}
 			}
 		}
 	}
-	return $ret;
+	return $user;
 }
 
 function drawProfile($user) {
+	print_r($user);
 	$complete = $user["complete"];
 	$in_progress = $user["in_progress"];
 	if (count($complete)>0) {
