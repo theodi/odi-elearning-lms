@@ -3,6 +3,11 @@
 	include('_includes/header.php');
 	include('_includes/functions.php');
 
+$userBadgeCredits["explorer"] = 0;
+$userBadgeCredits["strategist"] = 0;
+$userBadgeCredits["practitioner"] = 0;
+$userBadgeCredits["pioneer"] = 0;
+
 function getProfileData() {
 	global $userData;
 	$doc = load($userData["email"]);
