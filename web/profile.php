@@ -49,7 +49,7 @@ function outputCourses($courses,$heading) {
 	echo '<table style="width: 100%;">';
         echo '<tr><th>Course name</th><th style="width:150px;">Credits</th><th>Type</th><th>'.$heading.'</th></tr>';
 	foreach ($courses as $course) {
-	        echo outputCourse($doc,$course["progress"]);
+	        echo outputCourse($course,$course["progress"]);
 	}
 	echo '</table>';
 }
@@ -72,10 +72,11 @@ function getProgress($course,$progress) {
 	if ($progress["_isAssessmentPassed"] > 0 || $progress["_isCourseComplete"] > 0) {
 		$progress["completion"] = str_replace("0","1",$progress["completion"]);
 		$badgeData = getModuleBadgeData($course);
+		return 100;
 	}
 	$total = strlen($progress["completion"]);
 	$sub = substr_count($progress["completion"],0);
-	$complete = round($sub / $total);
+	$complete = round(($sub / $total) * 100);
 	return $complete;	
 }
 
