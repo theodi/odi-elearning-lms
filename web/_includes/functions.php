@@ -180,7 +180,7 @@ function outputCourse($doc,$progress) {
 		} elseif ($tracking[$doc["slug"]]) {
 			$output .= '<a href="/dashboard/index.php?module=' . $tracking[$doc["slug"]] . '"><img src="/images/dashboard.png" width="30px"/></a>';
 		} 
-	} elseif ($progress = 100) {
+	} elseif ($progress == 100) {
 		$output .= '<span id="tick">&#10004;</span>';
 	} elseif (is_numeric($progress)) {
 		$output .= '<progress max="100" value="'.$progress.'"></progress>';
