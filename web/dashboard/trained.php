@@ -11,10 +11,10 @@
 		if ($complete_modules > 0) {
 			$people_trained++;
 			$complete[$complete_modules]++;
+			$module_competions+=$complete_modules;
 		}
 	}
-	echo $people_trained;
-	print_r($complete);
+	ksort($complete);
 
 function getCompleteModuleCount($user,$courses) {
 	$complete = 0;
@@ -47,7 +47,37 @@ function getProgress($course,$progress) {
         return $complete;       
 }
 
+?>
+<style>
+        .box {font-family: Arial, sans-serif;background-color: #F1F1F1;border:0;width:340px;webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);margin: 0 auto 25px;text-align:center;padding:10px 0px; display: inline-block;}
+        .box img{padding: 10px 0px;}
+        .box a{color: #427fed;cursor: pointer;text-decoration: none;}
+        .number {font-size: 8em;}
+        sub {display: block; font-size: 2em;}
+        subsub {display: block; font-size: 1em;}
+</style>
+<div align="center">
+<div class="box">
+  <div>
+        <span class="number"><?php echo $people_trained; ?></span>
+        <sub>people trained</sub>
+        <subsub>(have completed at least 1 eLearning module)</subsub>
+  </div>
+</div>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<div class="box">
+  <div>
+        <span class="number"><?php echo $module_completions;?></span>
+        <sub>Module completions</sub>
+        <subsub>(1 person can complete multiple modules)</subsub>
+  </div>
+</div>
+</div>
 
-
+<?php
+	print_r($complete);
 	include('_includes/footer.html');
 ?>
