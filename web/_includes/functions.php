@@ -167,7 +167,7 @@ function outputCourse($doc,$progress) {
 		$output .= '<tr><td>' . $doc["title"] . '</td>';
 	}
      	$output .= '<td style="text-align: center;">';
-	$output .= outputCredits($courseId);
+	$output .= outputCredits($doc["id"]);
 	$output .= '</td>';
 	$output .= '<td style="text-align: center;"><img style="max-height: 40px;" src="/images/';
 	$output .= $doc["format"]; 
