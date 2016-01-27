@@ -79,16 +79,17 @@ function getProgress($course,$progress) {
 </div>
 <h2>Completed modules breakdown</h2>
 <p>The table below shows how many people have completed at least X modules. All those who have completed 2 will have completed 1 but are not inluding in this count. Everyone in this table has completed at least 1 module. It is not possible to tell from this data which modules have been completed, just the count.</p>
-<table style="width: 100%;">
-<tr><th>Number of modules completed</th><th>Number of people</th></tr>';
+<div align="center">
+<table style="width: 400px; text-align: center; line-height:20px;">
+<tr><th>Number of modules completed</th><th>Number of people</th></tr>
 <?php
 	for($i=1;$i<=count($complete);$i++) {
 		echo '<tr><td>' . $i . '</td><td>' . $complete[$i] . '</td></tr>';
 	}
 ?>
 </table>
+</div>
 
 <?php
-	print_r($complete);
 	include('_includes/footer.html');
 ?>
