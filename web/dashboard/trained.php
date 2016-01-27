@@ -50,7 +50,7 @@ function getProgress($course,$progress) {
 ?>
 <style>
 	body {line-height: 1;}
-        .box {font-family: Arial, sans-serif;background-color: #F1F1F1;border:0;width:340px;webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);margin: 0 auto 25px;text-align:center;padding:10px 0px; display: inline-block; height: 11em;}
+        .box {font-family: Arial, sans-serif;background-color: #F1F1F1;border:0;width:340px;webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);margin: 0 auto 25px;text-align:center;padding:10px 0px; display: inline-block; height: 11em; font-size: 15px;}
         .box img{padding: 10px 0px;}
         .box a{color: #427fed;cursor: pointer;text-decoration: none;}
         .number {font-size: 8em;}
