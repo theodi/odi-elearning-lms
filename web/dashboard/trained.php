@@ -49,8 +49,8 @@ function getProgress($course,$progress) {
 
 ?>
 <style>
-	body {line-height: auto;}
-        .box {font-family: Arial, sans-serif;background-color: #F1F1F1;border:0;width:340px;webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);margin: 0 auto 25px;text-align:center;padding:10px 0px; display: inline-block;}
+	body {line-height: 1;}
+        .box {font-family: Arial, sans-serif;background-color: #F1F1F1;border:0;width:340px;webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);margin: 0 auto 25px;text-align:center;padding:10px 0px; display: inline-block; height: 11em;}
         .box img{padding: 10px 0px;}
         .box a{color: #427fed;cursor: pointer;text-decoration: none;}
         .number {font-size: 8em;}
@@ -61,8 +61,8 @@ function getProgress($course,$progress) {
 <div class="box">
   <div>
         <span class="number"><?php echo $people_trained; ?></span>
-        <sub>people trained</sub>
-        <subsub>(have completed at least 1 eLearning module)</subsub>
+        <span class="sub">people trained</span>
+        <span class="subsub">(have completed at least 1 eLearning module)</span>
   </div>
 </div>
 &nbsp;
