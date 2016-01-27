@@ -1,5 +1,5 @@
 <?php
-	$location = "profile.php";
+	$location = "/profile.php";
 	include('_includes/header.php');
 	include('_includes/functions.php');
 
@@ -32,7 +32,6 @@ function getProfile($user) {
 }
 
 function drawProfile($user) {
-	print_r($user);
 	$complete = $user["complete"];
 	$in_progress = $user["in_progress"];
 	if (count($complete)>0) {
@@ -81,9 +80,7 @@ function getProgress($course,$progress) {
 }
 
 ?>
-<h1>Your profile</h1>
 <?php
-	require_once('_includes/functions.php');
 	$user = getProfileData($email);
 	drawProfile($user);
 	include('_includes/footer.html');

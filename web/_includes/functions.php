@@ -173,7 +173,7 @@ function outputCourse($doc,$progress) {
 	$output .= $doc["format"]; 
 	$output .= '.png"></img></td>';
 	$output .= '<td style="text-align: center;">';
-	if ($completed == "") {
+	if ($progress == "") {
 		if (substr($doc["id"],0,4) == "ODI_") {
 			$dashId = str_replace("ODI_","",$doc["id"]);
 			$output .= '<a href="/dashboard/index.php?module=' . $dashId . '"><img src="/images/dashboard.png" width="30px"/></a>';
