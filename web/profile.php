@@ -6,10 +6,8 @@
 function getProfileData() {
 	global $userData;
 	$doc = load($userData["email"]);
-	print_r($userData["email"]);
 	$doc = str_replace("．",".",$doc);
 	$data = json_decode($doc,true);
-	print_r($data);
 	$user = getProfile($data);
 	return $user;
 }
@@ -35,7 +33,8 @@ function getProfile($user) {
 }
 
 function drawProfile($user) {
-	print_r($user);
+	global $userBadgeCredits;
+	echo outputCreditsTable($userBadgeCredits);
 	$complete = $user["complete"];
 	$in_progress = $user["in_progress"];
 	if (count($complete)>0) {

@@ -192,6 +192,9 @@ function outputCourse($doc,$progress) {
 
 function outputCredits($courseId) {
 	$data = get_course_credits_by_badge($courseId);
+	return outputCreditsTable($data);
+}
+function outputCreditsTable($data) {
 	$rows = "";
 	foreach ($data as $key => $value) {
 		$total += $value;
