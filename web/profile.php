@@ -3,8 +3,9 @@
 	include('_includes/header.php');
 	include('_includes/functions.php');
 
-function getProfileData($email) {
+function getProfileData() {
 	$doc = load($userData["email"]);
+	print_r($userData["email"]);
 	$doc = str_replace("．",".",$doc);
 	$data = json_decode($doc,true);
 	print_r($data);
@@ -82,7 +83,7 @@ function getProgress($course,$progress) {
 
 ?>
 <?php
-	$user = getProfileData($email);
+	$user = getProfileData();
 	drawProfile($user);
 	include('_includes/footer.html');
 
