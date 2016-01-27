@@ -32,6 +32,7 @@ function getProfile($user) {
 }
 
 function drawProfile($user) {
+	print_r($user);
 	$complete = $user["complete"];
 	$in_progress = $user["in_progress"];
 	if (count($complete)>0) {
