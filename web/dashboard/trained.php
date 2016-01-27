@@ -11,7 +11,7 @@
 		if ($complete_modules > 0) {
 			$people_trained++;
 			$complete[$complete_modules]++;
-			$module_competions+=$complete_modules;
+			$module_completions+=$complete_modules;
 		}
 	}
 	ksort($complete);
@@ -49,12 +49,13 @@ function getProgress($course,$progress) {
 
 ?>
 <style>
+	body {line-height: auto;}
         .box {font-family: Arial, sans-serif;background-color: #F1F1F1;border:0;width:340px;webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);margin: 0 auto 25px;text-align:center;padding:10px 0px; display: inline-block;}
         .box img{padding: 10px 0px;}
         .box a{color: #427fed;cursor: pointer;text-decoration: none;}
         .number {font-size: 8em;}
-        sub {display: block; font-size: 2em;}
-        subsub {display: block; font-size: 1em;}
+        .sub {display: block; font-size: 2em;}
+        .subsub {display: block; font-size: 1em;}
 </style>
 <div align="center">
 <div class="box">
@@ -71,8 +72,8 @@ function getProgress($course,$progress) {
 <div class="box">
   <div>
         <span class="number"><?php echo $module_completions;?></span>
-        <sub>Module completions</sub>
-        <subsub>(1 person can complete multiple modules)</subsub>
+        <span class="sub">Module completions</span>
+        <span class="subsub">(1 person can complete multiple modules)</span>
   </div>
 </div>
 </div>
