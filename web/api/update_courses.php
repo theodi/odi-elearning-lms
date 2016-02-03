@@ -15,7 +15,6 @@ function getInstances() {
 	$data = file_get_contents($instances_url);
 	$data = str_replace("+00:00","Z",$data);
 	$data = str_replace("+01:00","Z",$data);
-	$data = str_replace('"date"','"$date"',$data);
 	$json = json_decode($data,true);
 	$results = $json["results"];
 	for ($i=0;$i<count($results);$i++) {
