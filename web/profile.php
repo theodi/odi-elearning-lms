@@ -43,18 +43,18 @@ function drawProfile($user) {
 	$complete = $user["complete"];
 	$in_progress = $user["in_progress"];
 	if (count($complete)>0) {
-		echo '<h2>Completed courses</h2>';
+		echo '<h2 class="profile_h2">Completed courses</h2>';
 		outputCourses($complete,"Complete");
 	}
 	if (count($in_progress)>0) {
-		echo '<h2>Courses in progress</h2>';
+		echo '<h2 class="profile_h2">Courses in progress</h2>';
 		outputCourses($in_progress,"Progress");
 	}
 }
 
 function outputCourses($courses,$heading) {
 	echo '<table style="width: 100%;">';
-        echo '<tr><th width="50%">Course name</th><th style="width:150px;">Credits</th><th width="20%">Type</th><th width="20%">'.$heading.'</th></tr>';
+        echo '<tr><th width="50%"></th><th style="width:150px;">Credits</th><th width="20%">Type</th><th width="20%">'.$heading.'</th></tr>';
 	foreach ($courses as $course) {
 	        echo outputCourse($course,$course["progress"]);
 	}

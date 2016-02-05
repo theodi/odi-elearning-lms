@@ -46,5 +46,10 @@ score {
   font-size: 3.5em;
 }
 #course_name {
-  font-size: 2em;
+  font-size: 1.5em;
+}
+.profile_h2 {
+  border-bottom: 1px solid gray;
+  padding-top: 20px;
+  margin-bottom: 35px;
 }
