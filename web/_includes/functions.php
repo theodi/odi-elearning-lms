@@ -165,9 +165,9 @@ function load($email) {
 function outputCourse($doc,$progress) {
 	$output = "";
    	if ($doc["web_url"]) {
-		$output .= '<tr><td><a target="_blank" href="'.$doc["web_url"].'">' . $doc["title"] . '</a></td>';
+		$output .= '<tr><td id="course_name"><a target="_blank" href="'.$doc["web_url"].'">' . $doc["title"] . '</a></td>';
 	} else {
-		$output .= '<tr><td>' . $doc["title"] . '</td>';
+		$output .= '<tr><td id="course_name">' . $doc["title"] . '</td>';
 	}
      	$output .= '<td style="text-align: center;">';
 	$output .= outputCredits($doc["id"]);

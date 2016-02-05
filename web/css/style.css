@@ -44,5 +44,9 @@ score {
     left: 17px;
     padding: 5px;
 }
-
-
+#tick {
+  font-size: 3.5em;
+}
+#course_name {
+  font-size: 2em;
+}
