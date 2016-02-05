@@ -10,7 +10,11 @@ $userBadgeCredits["pioneer"] = 0;
 
 function getProfileData() {
 	global $userData;
-	$doc = load($userData["email"]);
+	if ($userData["sudo_user"]) {
+		$doc = load($userData["sudo_user"]);
+	} else {
+		$doc = load($userData["email"]);
+	}
 	$doc = str_replace("．",".",$doc);
 	$data = json_decode($doc,true);
 	$user = getProfile($data);
@@ -86,8 +90,23 @@ function getProgress($course,$progress) {
 	return $complete;	
 }
 
+function enableSelectUser() {
+	global $userData;
+	if ($_GET["sudo_user"]) {
+		$userData["sudo_user"] = $_GET["sudo_user"];
+	}
+	echo '<form action="" method="get" style="text-align: right; position: relative; bottom: 5em; margin-bottom: -60px;">';
+    echo '<input name="sudo_user" type="text" value="'.$userData["sudo_user"].'"></input>';
+    echo '<input type="submit" value="Go" style="padding: 0.2em 1em; position: relative; bottom: 5px;"/>';
+	echo '</form>';
+}
+
 ?>
 <?php
+
+	if ($userData["isAdmin"]) {
+		enableSelectUser();
+	}
 	$user = getProfileData();
 	drawProfile($user);
 	include('_includes/footer.html');
