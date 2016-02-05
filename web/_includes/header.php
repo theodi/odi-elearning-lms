@@ -170,7 +170,7 @@ function getUserStatusLink($pages) {
 								echo '<div class="arrow-down"></div>';
 							}
 							echo '</li>';
-						} elseif ($page["loggedIn"] && $userData) {
+						} elseif ($page["loggedIn"] && !$page["admin"] && $userData) {
 							echo '<li><a href="'.$page["url"].'">'.$page["title"].'</a>';
 							if ($current == $page["url"]) {
 								echo '<div class="arrow-down"></div>';
