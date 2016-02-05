@@ -54,7 +54,7 @@ function drawProfile($user) {
 
 function outputCourses($courses,$heading) {
 	echo '<table style="width: 100%;">';
-        echo '<tr><th>Course name</th><th style="width:150px;">Credits</th><th>Type</th><th>'.$heading.'</th></tr>';
+        echo '<tr><th width="50%">Course name</th><th style="width:150px;">Credits</th><th width="20%">Type</th><th width="20%">'.$heading.'</th></tr>';
 	foreach ($courses as $course) {
 	        echo outputCourse($course,$course["progress"]);
 	}
