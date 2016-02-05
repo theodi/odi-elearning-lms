@@ -21,3 +21,28 @@ score {
 #course_credits_table tr {
    line-height: 1.2em;
 }
+#user_credits {
+  width: 40%; 
+  text-align: center;
+}
+#user_badge {
+  margin-bottom: -14px;
+}
+#user_credits_score{
+  font-size: 4em;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #00b7ff;
+    border-radius: 10px;
+    color: white;
+}
+#user_badge_cell {
+    background-color: #00b7ff;
+    color: white;
+    border-radius: 10px;
+    position: relative;
+    left: 17px;
+    padding: 5px;
+}
+
+

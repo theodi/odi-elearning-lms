@@ -39,7 +39,7 @@ function getProfile($user) {
 
 function drawProfile($user) {
 	global $userBadgeCredits;
-	echo outputCreditsTable($userBadgeCredits);
+	echo outputUserCredits($userBadgeCredits);
 	$complete = $user["complete"];
 	$in_progress = $user["in_progress"];
 	if (count($complete)>0) {

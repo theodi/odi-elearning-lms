@@ -192,6 +192,18 @@ function outputCourse($doc,$progress) {
 	$output .= '</tr>';
         return $output;
 }
+function outputUserCredits($data) {
+	$box = '<div align="right"><table id="user_credits"><tr>';
+	foreach ($data as $key => $value) {
+		$total += $value;
+		$box .= '<td id="user_badge_cell"><svg id="user_badge" width="80" height="60">
+  					<image xlink:href="images/badges/'.$key.'.svg" src="images/badges'.$key.'.png" width="80" height="60" />
+				</svg><br/>'.ucwords($key).'</td>';
+		$box .= '<td id="user_credits_score">' . $value . '</td>';
+	}
+	$box .= '</tr></table></div>';
+	return $box;
+}
 
 function outputCredits($courseId) {
 	$data = get_course_credits_by_badge($courseId);
