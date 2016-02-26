@@ -42,7 +42,12 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
 //Get User Data from Google Plus
 //If New, Insert to Database
 if ($client->getAccessToken()) {
-  $userData = $objOAuthService->userinfo->get();
+  try {
+	$userData = $objOAuthService->userinfo->get();
+  } catch (Exception $e) {
+	header('Location: /?logout');
+	exit(1);
+  }
   $email = $userData["email"];
   $suffix = substr($email,strrpos($email,"@")+1,strlen($email));
   if ($suffix == "theodi.org") {
