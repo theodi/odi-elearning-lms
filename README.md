@@ -1,3 +1,5 @@
+[![Build Status](http://img.shields.io/travis/theodi/odi-elearning-lms.svg?style=flat-square)](https://travis-ci.org/theodi/odi-elearning-lms)
+
 # php-getting-started
 
 A barebones PHP app that makes use of the [Silex](http://silex.sensiolabs.org/) web framework, which can easily be deployed to Heroku.
