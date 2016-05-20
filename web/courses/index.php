@@ -75,7 +75,7 @@ $(document).ready(function() {
 					id = d["id"];
 					format = d["format"];
             		if (id.substring(0,4) == "ODI_") {
-                        	dashId = id.substring(5);
+                        	dashId = id.substring(4);
                        	 	output = '<a href="/dashboard/index.php?module=' + dashId + '"><img src="/images/dashboard.png" width="30px"/></a>';
                 	} else {
                         	output = '<a href="/dashboard/index.php?module=' + d["ID"] + '"><img src="/images/dashboard.png" width="30px"/></a>';

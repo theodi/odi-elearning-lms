@@ -5,7 +5,14 @@
 	include('_includes/header.php');
 	include_once('_includes/functions.php');
 	$data = get_data_from_collection($collection);
-	$courses = getCoursesData();
+
+    $courses = getCoursesData();
+
+    if ($theme && $theme != "default") {
+        $filter = get_client_mapping($theme);
+        $courses = filterCourses($courses,$filter);
+    }
+
 	foreach ($data as $user) {
 		$complete_modules = getCompleteModuleCount($user,$courses);
 		if ($complete_modules > 0) {
@@ -24,14 +31,14 @@ function getCompleteModuleCount($user,$courses) {
                         $course = substr($key,0,strpos($key,"_cmi"));
                         $progress = $data;
                         if ($courses[$course] && $courses[$course]["format"] == "eLearning") {
-				$course_id = $courses[$course]["id"];
-				$course_id = substr($course_id,4);
-				if (is_numeric($course_id) && $course_id < 14) {
-                                	$courses[$course]["progress"] = getProgress($courses[$course],$progress);
-                                	if ($courses[$course]["progress"] > 99) {
-                                        	$complete++;
-                                	}
-				}
+				            $course_id = $courses[$course]["id"];
+				            $course_id = substr($course_id,4);
+	           //			if (is_numeric($course_id) && $course_id < 14) {
+                             	$courses[$course]["progress"] = getProgress($courses[$course],$progress);
+                               	if ($courses[$course]["progress"] > 99) {
+                                       	$complete++;
+                               	}
+	           //			}
                         }
                 }
         }

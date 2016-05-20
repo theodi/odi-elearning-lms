@@ -122,8 +122,8 @@ function getUserStatusLink($pages) {
 	$page['long_title'] = "Course list";
 	$pages[] = $page;
 	$page['url'] = '/dashboard/trained.php';
-	$page['title'] = 'Overview';
-	$page['long_title'] = "Overview stats";
+	$page['title'] = 'Statistics';
+	$page['long_title'] = "Statistics [eLearning only]";
 	$pages[] = $page;
 	$page['url'] = '/profile.php';
 	$page['title'] = 'Profile';
