@@ -7,8 +7,12 @@ include_once 'config.inc.php';
 include('_includes/api-header.php');
 
 $data = getCourseIdentifierData();
+$mapping = getCourseMappingData();
+$hosts = getHostsData();
 
+$all["mapping"] = prepareData($mapping);
 $all["identifiers"] = prepareData($data);
+$all["hosts"] = prepareHostsData($hosts);
 $all["id"] = "CourseIdentifiers";
 $all["title"] = "Course Identifiers";
 //print_r($all);
@@ -23,6 +27,24 @@ function prepareData($data) {
   return $master;
 }
 
+function prepareHostsData($data) {
+  $master = "";
+  for($i=1;$i<count($data);$i++) {
+    $bits = str_getcsv($data[$i]);
+    $master[str_replace(".","_",$bits[0])][] = $bits[1];  
+  }
+  return $master;
+}
+
+function getHostsData() {
+  $content = exec('php ~/getFile.php 1MVEBNzmvQRUz0787NMBcp69GM4w9zwaIHt_WNVsxizQ',$output);
+  return $output;
+}
+
+function getCourseMappingData() {
+  $content = exec('php ~/getFile.php 1s01ZBNyTsGScQZFPZNhBDfYACcwXvvaSMiT9yAFHIyc',$output);
+  return $output;
+}
 function getCourseIdentifierData() {
   $content = exec('php ~/getFile.php 17gtugoN05aYnWN07Exf6_RpdknlpCfi6a1WSTyJ_z7c',$output);
   return $output;

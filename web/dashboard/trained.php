@@ -3,7 +3,7 @@
 	$path = "../";
 	set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 	include('_includes/header.php');
-	include('_includes/functions.php');
+	include_once('_includes/functions.php');
 	$data = get_data_from_collection($collection);
 	$courses = getCoursesData();
 	foreach ($data as $user) {
@@ -23,17 +23,21 @@ function getCompleteModuleCount($user,$courses) {
                 if (strpos($key,"_cmi.suspend_data") !== false) {
                         $course = substr($key,0,strpos($key,"_cmi"));
                         $progress = $data;
-                        if ($courses[$course]) {
-                                $courses[$course]["progress"] = getProgress($courses[$course],$progress);
-                                if ($courses[$course]["progress"] > 99) {
-                                        $complete++;
-                                }
+                        if ($courses[$course] && $courses[$course]["format"] == "eLearning") {
+				$course_id = $courses[$course]["id"];
+				$course_id = substr($course_id,4);
+				if (is_numeric($course_id) && $course_id < 14) {
+                                	$courses[$course]["progress"] = getProgress($courses[$course],$progress);
+                                	if ($courses[$course]["progress"] > 99) {
+                                        	$complete++;
+                                	}
+				}
                         }
                 }
         }
 	return $complete;
 }
-
+/*
 function getProgress($course,$progress) {
         $spoor = json_decode($progress,true);
         $progress = $spoor["spoor"];
@@ -46,7 +50,7 @@ function getProgress($course,$progress) {
         $complete = round(($sub / $total) * 100);
         return $complete;       
 }
-
+*/
 ?>
 <style>
 	body {line-height: 1;}
@@ -78,7 +82,7 @@ function getProgress($course,$progress) {
 </div>
 </div>
 <h2>Completed modules breakdown</h2>
-<p>The table below shows how many people have completed at least X modules. All those who have completed 2 will have completed 1 but are not inluded in this count. Everyone in this table has completed at least 1 module. It is not possible to tell from this data which modules have been completed, just the count.</p>
+<p>The table below shows how many people have completed at least X modules. All those who have completed 2 will have completed 1 but are not included in this count. Everyone in this table has completed at least 1 module. It is not possible to tell from this data which modules have been completed, just the count.</p>
 <div align="center">
 <table style="width: 400px; text-align: center; line-height:20px;">
 <tr><th>Number of modules completed</th><th>Number of people</th></tr>

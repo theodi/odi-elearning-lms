@@ -1,1 +1,9 @@
+config.inc.php_heroku
+config.inc.php_local
+switch_local.sh
+switch_heroku.sh
+vendor/
+composer.phar
+backups/
 client_secret.json
+getFileLocal.php

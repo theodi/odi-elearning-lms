@@ -15,6 +15,7 @@ var module = getUrlVars()["module"];
 var completePie = dc.pieChart('#complete-pie');
 var passedPie = dc.pieChart('#passed-pie');
 var emailPie = dc.pieChart('#email-pie');
+var platformPie = dc.pieChart('#platform-pie');
 var themeLine = dc.rowChart('#theme-line');
 var langLine = dc.rowChart('#lang-line');
 var completeBar = dc.barChart('#complete-bar');
@@ -96,6 +97,24 @@ d3.csv('https://odi-elearning.herokuapp.com/data.php?module='+module, function (
         .group(emailGroup)
 //        .ordinalColors(['green', 'red')
         .colors(d3.scale.ordinal().domain(["true","false"]).range(['blue','gray']))
+        .label(function (d) {
+            var label = d.key;
+            return label;
+        });
+    
+    var platform = ndx.dimension(function(d) {
+        return d.platform;
+    });
+    
+    var platformGroup = platform.group();
+   
+    platformPie
+        .width(160)
+        .height(160)
+        .radius(80)
+        .dimension(platform)
+        .group(platformGroup)
+//        .ordinalColors(['green', 'red')
         .label(function (d) {
             var label = d.key;
             return label;

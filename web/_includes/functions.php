@@ -20,8 +20,180 @@ function getCoursesData() {
 		} else {
 			$courses[$id] = $doc;
 		}
+		$los = $courses[$id]["_learningOutcomes"];
+		$badge = "";
+		$total = 0;
+		for ($i=0;$i<count($los);$i++) {
+			$lo = $los[$i];
+			$badge[$lo["badge"]] += $lo["credits"];
+			$total += $lo["credits"];
+		}
+		$courses[$id]["credits"] = $badge;
+		$courses[$id]["totalCredits"] = $total;
 	}
 	return $courses;
+}
+
+
+function filterCourses($courses,$userCourses) {
+  $ret = "";
+  foreach ($courses as $id => $data) {
+    for($i=0;$i<count($userCourses);$i++) {
+      if ($userCourses[$i] == $id) {
+        $ret[$id] = $data;
+      }
+    }
+  }
+  return $ret;
+}
+
+function geteLearningCompletion($user,$courses,$ret) {
+	foreach($user as $key => $data) {
+		$key = str_replace("．",".",$key);
+		if (strpos($key,"_cmi.suspend_data") !== false) {
+			$course = substr($key,0,strpos($key,"_cmi"));
+			$progress = $data;
+			if ($courses[$course]) {
+				$courses[$course]["progress"] = getProgress($courses[$course],$progress);
+				if ($courses[$course]["progress"] > 99) {
+					$ret["complete"][] = $courses[$course]["id"];
+				} else {
+					$ret["in_progress"][] = $courses[$course]["id"];
+				}
+			}
+		}
+	}
+	$ret["complete"] = @array_unique($ret["complete"]);
+	$ret["in_progress"] = @array_unique($ret["in_progress"]);
+	$ret["in_progress"] = @array_diff($ret["in_progress"],$ret["complete"]);
+	return $ret;
+}
+
+function getExternalAccess($email,$theme) {
+	global $connection_url, $db_name;
+	$collection = "externalAccess";
+	try {
+		$m = new MongoClient($connection_url);
+		$col = $m->selectDB($db_name)->selectCollection($collection);
+		$query = array('email' => $email, 'theme' => $theme);
+		$res = $col->find($query);	
+		foreach ($res as $doc) {
+			return $doc;
+		}
+		$m->close();
+	} catch ( MongoConnectionException $e ) {
+		syslog(LOG_ERR,'Error connecting to MongoDB server ' . $connection_url . ' - ' . $db_name . ' <br/> ' . $e->getMessage());
+		return false;
+   	} catch ( MongoException $e ) {
+		syslog(LOG_ERR,'Mongo Error: ' . $e->getMessage());
+		return false;
+  	} catch ( Exception $e ) {
+		syslog(LOG_ERR,'Error: ' . $e->getMessage());
+		return false;
+   	}
+   	return false;
+}
+
+function getExternalBadgeData($userid) {
+   global $connection_url, $db_name;
+   $attendance = false;
+   $collection = "externalBadges";
+   try {
+		$m = new MongoClient($connection_url);
+		$col = $m->selectDB($db_name)->selectCollection($collection);
+		$query = array('Email' => $userid);
+		$res = $col->find($query);	
+		foreach ($res as $doc) {
+			$badges[] = $doc;
+		}
+
+		$m->close();
+	} catch ( MongoConnectionException $e ) {
+		syslog(LOG_ERR,'Error connecting to MongoDB server ' . $connection_url . ' - ' . $db_name . ' <br/> ' . $e->getMessage());
+		return false;
+   	} catch ( MongoException $e ) {
+		syslog(LOG_ERR,'Mongo Error: ' . $e->getMessage());
+		return false;
+  	} catch ( Exception $e ) {
+		syslog(LOG_ERR,'Error: ' . $e->getMessage());
+		return false;
+   	}
+   	return $badges;
+}
+
+
+function getF2FAttendance($userid) {
+   global $connection_url, $db_name;
+   $attendance = false;
+   $collection = "courseAttendance";
+   try {
+		$m = new MongoClient($connection_url);
+		$col = $m->selectDB($db_name)->selectCollection($collection);
+		$query = array('Email' => $userid, "Attended" => "Yes");
+		$res = $col->find($query);	
+	
+		foreach ($res as $doc) {
+			$attendance[] = $doc;
+		}
+
+		$query = array('Email' => $userid, "Attended" => "yes");
+		$res = $col->find($query);	
+	
+		foreach ($res as $doc) {
+			$attendance[] = $doc;
+		}
+	
+		$m->close();
+	} catch ( MongoConnectionException $e ) {
+		syslog(LOG_ERR,'Error connecting to MongoDB server ' . $connection_url . ' - ' . $db_name . ' <br/> ' . $e->getMessage());
+		return false;
+   	} catch ( MongoException $e ) {
+		syslog(LOG_ERR,'Mongo Error: ' . $e->getMessage());
+		return false;
+  	} catch ( Exception $e ) {
+		syslog(LOG_ERR,'Error: ' . $e->getMessage());
+		return false;
+   	}
+   	return $attendance;
+}
+
+function getProgress($course,$progress) {
+	$spoor = json_decode($progress,true);
+	$progress = $spoor["spoor"];
+	if ($progress["_isAssessmentPassed"] > 0 || $progress["_isCourseComplete"] > 0) {
+		$progress["completion"] = str_replace("0","1",$progress["completion"]);
+		$badgeData = getModuleBadgeData($course);
+		return 100;
+	}
+	$total = strlen($progress["completion"]);
+	$sub = substr_count($progress["completion"],0);
+	$complete = round(($sub / $total) * 100);
+	return $complete;	
+}
+
+function getModuleBadgeData($course) {
+	global $userBadgeCredits;
+	$los = $course["_learningOutcomes"];
+	for ($i=0;$i<count($los);$i++) {
+		$lo = $los[$i];
+		$badge[$lo["badge"]] += $lo["credits"];
+		$userBadgeCredits[$lo["badge"]] += $lo["credits"];
+	}
+	return $badge;
+}
+
+function getTheme($host) {
+	$host = str_replace(".","_",$host);
+    $courseIdentifiers = get_data_from_collection("courseIdentifiers");
+    foreach ($courseIdentifiers as $doc) {
+   		$doc = $doc["hosts"];
+   		foreach ($doc as $key => $value) {
+   			if ($key == $host) {
+   				return $value[0];
+   			}
+   		}
+   	}
+   	return false;
 }
 
 function get_course_identifiers() {
@@ -37,6 +209,19 @@ function get_course_identifiers() {
    	return $tracking;
 }
 
+function get_client_mapping($theme) {
+    $courseIdentifiers = get_data_from_collection("courseIdentifiers");
+    foreach ($courseIdentifiers as $doc) {
+   		$doc = $doc["mapping"];
+   		foreach ($doc as $key => $value) {
+   			if ($key == $theme) {
+   				return $value;
+   			}
+    	}
+   	}
+   	return false;
+}
+
 function get_course_credits_by_badge($id) {
 	$badge["explorer"] = 0;
 	$badge["strategist"] = 0;
@@ -49,6 +234,18 @@ function get_course_credits_by_badge($id) {
 		$badge[$lo["badge"]] += $lo["credits"];
 	}
 	return $badge;
+}
+
+function getSources($doc_id) {
+	$content = exec('php ~/getFile.php ' . $doc_id,$lines);
+  	$headers = str_getcsv($lines[0]);
+	for($i=1;$i<count($lines);$i++) {
+		$line = str_getcsv($lines[$i]);
+		$record["key"] = $line[0];
+		$record["id"] = $line[1];
+		$ret[] = $record;
+	}
+	return($ret);
 }
 
 function get_course_by_id($id) {
@@ -85,7 +282,8 @@ function get_data_from_collection($collection) {
 }
 
 function archive_empty_profiles() {
-   global $connection_url, $db_name, $collection;
+   global $connection_url, $db_name;
+   $collection = "elearning";
    try {
 	 // create the mongo connection object
 	$m = new MongoClient($connection_url);
@@ -102,8 +300,8 @@ function archive_empty_profiles() {
 		$id = $doc["_id"];
 		$query = array('_id' => $id);
 		if (!$doc["ODI_lastSave"] || !$doc["theme"]) {
-	        	$count = $col2->count($query);
-	        	if ($count > 0) {
+	        $count = $col2->count($query);
+	        if ($count > 0) {
 				$newdata = array('$set' => $doc);
 				$col2->update($query,$newdata);
 			} else {
@@ -129,11 +327,12 @@ function archive_empty_profiles() {
    }
 }
 function load($email) {
+   global $connection_url, $db_name;
+   $collection = "elearning";
    if ($email == "" || !$email) {
 	return null;
    }
    $email = str_replace('.','．',$email);
-   global $connection_url, $db_name, $collection;
    try {
 	 // create the mongo connection object
 	$m = new MongoClient($connection_url);

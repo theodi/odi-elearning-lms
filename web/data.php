@@ -117,6 +117,7 @@ function processRecord($doc) {
 		$output["id"] = $doc["_id"];
 		$output["lang"] = $doc["lang"];
 		$output["theme"] = $doc["theme"];
+		$output["platform"] = $doc["platform"];
 		if ($doc["email"]) {
 			$output["email"] = "true";
 		} else {
@@ -137,6 +138,7 @@ function processOutput($output) {
 	$line["id"] = $output["id"];
 	$line["email"] = $output["email"];
 	$line["theme"] = $output["theme"];
+	$line["platform"] = $output["platform"];
 	$line["lang"] = $output["lang"];
 
 	$progress = $output["cmi.suspend_data"];

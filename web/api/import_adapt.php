@@ -7,6 +7,9 @@ include_once 'config.inc.php';
 include('_includes/api-header.php');
 
 $url = $_GET["url"];
+if (!$id || $id == "") {
+  return "GO AWAY";
+}
 
 $data = getCourseData($url);
 $data["_id"] = getModuleId($url);
