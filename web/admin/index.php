@@ -38,6 +38,12 @@
 	Hosts mapping can be updated <a href="https://docs.google.com/spreadsheets/d/1MVEBNzmvQRUz0787NMBcp69GM4w9zwaIHt_WNVsxizQ/edit#gid=0" target="_blank">here</a><br/><br/>
 </section>
 
+<h2>Update website course listings</h2>
+<section id="update_course_listings">
+	Update course listings data for the main ODI website.<br/><br/>
+	<button id="update_listings_button">Update course listings</button>
+</section>
+
 <h2>Update course attendance</h2>
 <section id="update_attendance">
 	Update data for face-to-face course attendance from the source spreadsheets by clicking the relevant button.<br/><br/>
@@ -90,6 +96,13 @@ function update_courses() {
 	$('#update_courses').html('Please wait');
 	$.get('/api/update_courses.php',function(data) {
 		$('#update_courses').html(data);
+	});
+}
+
+function update_course_listings() {
+	$('#update_course_listings').html('Please wait');
+	$.get('http://odi-courses-data.herokuapp.com/update.php',function(data) {
+		$('#update_course_listings').html(data);
 	});
 }
 
